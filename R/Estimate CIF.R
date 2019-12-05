@@ -1,9 +1,10 @@
-#' Estimating CIF 
+#' Estimating CIF
 #'
 #' This function is based on the CIF estimated by the survival package
 #' Returns an object type dataframe with the following variables and order:
 #' col1		col2		col3	col4		col5	...
-#' event	exposure	time	CI0inc_i	CI1inc_i ... 	
+#' event	exposure	time	CI0inc_i	CI1inc_i ...
+#' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"
 #' @return Estimating CIF per event and exposure level
 #' @export
 CRCumInc <- function(df,time,event,exposed,entry=NULL,weights=NULL,ipwvars=NULL,print.attr=T){
@@ -17,18 +18,18 @@ CRCumInc <- function(df,time,event,exposed,entry=NULL,weights=NULL,ipwvars=NULL,
   entry <- df[[deparse(substitute(entry))]]
   if(is.null(entry)) entry <- rep(0,length(time))
   entry <- round(entry, 4)
-  
+
   # User-provided weights
   weights <- df[[deparse(substitute(weights))]]
   if(is.null(weights)) weights <- rep(1,length(time))
-  
+
   # Model-generated weights
   if(!is.null(ipwvars)){
     ipwdf <- as.data.frame(cbind(exposed,df[,ipwvars]))
     ipwmodel <- glm(as.formula(ipwdf), family="binomial", data=ipwdf)
     #fweights <- formula(paste(deparse(substitute(exposed)) , " ~ ", paste(ipwvars, collapse=" + ")))
     #ipwmodel <- glm(fweights, family="binomial", df)
-    #print(summary(ipwmodel))
+    print(summary(ipwmodel))
     ipwpred <- predict(ipwmodel,type="response")
     sipw <- as.numeric()
     sipw[exposed==1] <- 1/ipwpred[exposed==1] * (sum(exposed==1)/length(exposed))
@@ -41,7 +42,7 @@ CRCumInc <- function(df,time,event,exposed,entry=NULL,weights=NULL,ipwvars=NULL,
     weights <- sipw
     #print(quantile(weights))
   }
-  
+
   # Adjust the times in order to distinguish separate events when times are tied, with censoring after events
   time <- time + 1e-005 * event #this will fail if nevents>=5
   time[event == 0] <- time[event == 0] + 4.9e-005

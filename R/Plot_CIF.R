@@ -5,6 +5,8 @@
 #' x is data, x default, and z is uppertime (optional) default set to 99999
 #' this needs event, exposure, time, CI0_comp, CI1_comp,CI0inc_1,CI1inc_1, CI0inc_!1,CI1inc_!1
 #' which is the result of CRCumInc(event)
+#' @importFrom "grDevices" "gray"
+#' @importFrom "graphics" "abline" "axis" "box" "lines" "mtext" "par" "plot" "text"
 #' @return Plot function
 #' @export
 
@@ -40,9 +42,8 @@ plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
   if (.Platform$OS.type == "windows") {
     windows(height = 7.5, width = 10)
   }
-  xmax <- max(time)*1.05
   par(mgp = c(2.25, 0.5, 0), las = 1, mfrow = c(1, 2), mar = c(5.1, 4.1, 2.1, 2.1), cex.lab = 1, cex.axis = 1)
-  plot(0, 0, pch = 16, xlim = c(0, xmax), ylim = c(0, 1), main = "", ylab = "", xlab = "Time", cex.lab = 1, font.main = 12, type = "n", yaxt = "n", xaxs = "i")
+  plot(0, 0, pch = 16, xlim = c(0, max(time)), ylim = c(0, 1), main = "", ylab = "", xlab = "Time", cex.lab = 1, font.main = 12, type = "n", yaxt = "n", xaxs = "i")
   mtext("Cumulative incidence of composite event", at = 0.5, side = 2, line = 1.5, las = 0, col = gray(0.25))
   axis(2, at = seq(0, 1, 0.2), col.axis = gray(0.25), labels = seq(0, 100, 20))
   lines(stepfun(time, c(0, Ix), f = 0), lty = 1, cex = 0, lwd = 3, col = gray(0.25))
@@ -50,7 +51,7 @@ plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
   par(mar = c(5.1, 4.1, 2.1, 4.1))
 
   if(ncol(cifobj)==9 | eoi>0){ # funnel plot
-    plot(0, 0, pch = 16, xlim = c(0, xmax), ylim = c(0, 1), main = "", ylab = "", xlab = "Time", cex.lab = 1, font.main = 12, type = "n", yaxt = "n", xaxs = "i")
+    plot(0, 0, pch = 16, xlim = c(0, max(time)), ylim = c(0, 1), main = "", ylab = "", xlab = "Time", cex.lab = 1, font.main = 12, type = "n", yaxt = "n", xaxs = "i")
     ymax <- round(5*max(c(J1o,J1x)))/5
     ymax2 <- round(5*max(c(J2o,J2x)))/5
     mtext("Cumulative incidence of event of interest", side = 2, at = ymax/2, las = 0, line = 1.5, col = gray(0.5))
@@ -67,7 +68,7 @@ plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
   } #endif2
 
   if(ncol(cifobj)==11 & eoi<0){ # stack plot
-    plot(0, 0, pch = 16, xlim = c(0, xmax), ylim = c(0, 1), main = "", ylab = "", xlab = "Time", cex.lab = 1, font.main = 12, type = "n", yaxt = "n", xaxs = "i")
+    plot(0, 0, pch = 16, xlim = c(0, max(time)), ylim = c(0, 1), main = "", ylab = "", xlab = "Time", cex.lab = 1, font.main = 12, type = "n", yaxt = "n", xaxs = "i")
     mtext("Cumulative incidence of events", side = 2, at = 0.5, las = 0, line = 1.5, col = gray(0))
     axis(2, at = seq(0, 1, 0.2), col.axis = gray(0), labels = 100*seq(0, 1, 0.2))
     box()
@@ -80,7 +81,7 @@ plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
   } #endif3
 
   if(ncol(cifobj)==13 & eoi<0){ # stack plot
-    plot(0, 0, pch = 16, xlim = c(0, xmax), ylim = c(0, 1), main = "", ylab = "", xlab = "Time", cex.lab = 1, font.main = 12, type = "n", yaxt = "n", xaxs = "i")
+    plot(0, 0, pch = 16, xlim = c(0, max(time)), ylim = c(0, 1), main = "", ylab = "", xlab = "Time", cex.lab = 1, font.main = 12, type = "n", yaxt = "n", xaxs = "i")
     mtext("Cumulative incidence of events", side = 2, at = 0.5, las = 0, line = 1.5, col = gray(0))
     axis(2, at = seq(0, 1, 0.2), col.axis = gray(0), labels = 100*seq(0, 1, 0.2))
     box()
@@ -97,61 +98,65 @@ plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
   #ttx <- sort(data$time)
   #ttx <- ttx[ttx < maxtime]
   ntimes <- length(time)
-  B1.A1 <- 1/((1 - (I2x+I3x+I4x)/(1 - I1x))/(1 - (I2o+I3o+I4o)/(1 - I1o)))
-  B2.A2 <- 1/((1 - (I1x+I3x+I4x)/(1 - I2x))/(1 - (I1o+I3o+I4o)/(1 - I2o)))
-  B3.A3 <- 1/((1 - (I1x+I2x+I4x)/(1 - I3x))/(1 - (I1o+I2o+I4o)/(1 - I3o)))
-  if(max(c(I3o,I3x))==0) B3.A3 <- rep(1,ntimes)
-  B4.A4 <- 1/((1 - (I1x+I2x+I3x)/(1 - I4x))/(1 - (I1o+I2o+I3o)/(1 - I4o)))
-  if(max(c(I4o,I4x))==0) B4.A4 <- rep(1,ntimes)
+  R1 <- (1 - (I2x+I3x+I4x)/(1 - I1x))/(1 - (I2o+I3o+I4o)/(1 - I1o))
+  R2 <- (1 - (I1x+I3x+I4x)/(1 - I2x))/(1 - (I1o+I3o+I4o)/(1 - I2o))
+  R3 <- (1 - (I1x+I2x+I4x)/(1 - I3x))/(1 - (I1o+I2o+I4o)/(1 - I3o))
+  if(max(c(I3o,I3x))==0) R3 <- rep(1,ntimes)
+  R4 <- (1 - (I1x+I2x+I3x)/(1 - I4x))/(1 - (I1o+I2o+I3o)/(1 - I4o))
+  if(max(c(I4o,I4x))==0) R4 <- rep(1,ntimes)
   if (.Platform$OS.type == "windows") {
     windows(height = 7.5, width = 10)
   }
-  yrange <- range(list(B1.A1,B2.A2,B3.A3,B4.A4,ci))
+  yrange <- range(list(R1,R2,R3,R4,ci))
   par(mar = c(5.1, 4.1, 2.1, 2.1), mfrow = c(1, 2), pch = -1)
-  plot(1, 1, type = "n", xlim = c(0, xmax), ylim = yrange, xlab = "Time", ylab = expression(paste("Cause-specific hazard ratio / sub-hazard ratio (  ", B[1]/A[1], ")")), log = "y", xaxs = "i")
+  plot(1, 1, type = "n", xlim = c(0, max(time)), ylim = yrange, xlab = "Time", ylab = expression(paste("Sub-hazard ratio / Cause-specific hazard ratio ( ", R[1], ")")), log = "y", xaxs = "i")
   xmid <- mean(par("usr")[1:2])
   abline(h = 1, lty = 2, col = gray(0.5))
   box()
-  lines(stepfun(time, c(1, B1.A1)), col = gray(0), lwd = 3, cex = 0)
-  text(xmid, quantile(yrange,0.95), "Event 1", cex = 1.2, col = gray(0))
+  lines(stepfun(time, c(1, R1)), col = gray(0), lwd = 3, cex = 0)
+  #text(xmid, quantile(yrange,0.95), "Event 1", cex = 1.2, col = gray(0))
+  mtext("Event 1",at=xmid,side=3,line=1,cex=1.2)
   if (!is.null(ci)) {
-    lines(stepfun(time, c(1, ci$B1.A1.lower[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
-    lines(stepfun(time, c(1, ci$B1.A1.upper[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
+    lines(stepfun(time, c(1, ci$R1.lower[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
+    lines(stepfun(time, c(1, ci$R1.upper[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
   }
-  plot(1, 1, type = "n", xlim = c(0, xmax), ylim = yrange, xlab = "Time", ylab = expression(paste("Cause-specific hazard ratio / sub-hazard ratio (  ", B[2]/A[2], ")")), log = "y", xaxs = "i")
+  plot(1, 1, type = "n", xlim = c(0, max(time)), ylim = yrange, xlab = "Time", ylab = expression(paste("Sub-hazard ratio / Cause-specific hazard ratio ( ", R[2], ")")), log = "y", xaxs = "i")
   abline(h = 1, lty = 2)
   box()
-  lines(stepfun(time, c(1, B2.A2)), col = gray(0), lwd = 3, cex = 0)
+  lines(stepfun(time, c(1, R2)), col = gray(0), lwd = 3, cex = 0)
   if (!is.null(ci)) {
-    lines(stepfun(time, c(1, ci$B2.A2.lower[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
-    lines(stepfun(time, c(1, ci$B2.A2.upper[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
+    lines(stepfun(time, c(1, ci$R2.lower[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
+    lines(stepfun(time, c(1, ci$R2.upper[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
   }
-  text(xmid, quantile(yrange,0.95), "Event 2", cex = 1.2, col = gray(0))
+  #text(xmid, quantile(yrange,0.95), "Event 2", cex = 1.2, col = gray(0))
+  mtext("Event 2",at=xmid,side=3,line=1,cex=1.2)
 
   if(ncol(cifobj)>10){
     if (.Platform$OS.type == "windows") {
       windows(height = 7.5, width = 10)
     }
     par(mar = c(5.1, 4.1, 2.1, 2.1), mfrow = c(1, 2), pch = -1)
-    plot(1, 1, type = "n", xlim = c(0, xmax), ylim = yrange, xlab = "Time", ylab = expression(paste("Cause-specific hazard ratio / sub-hazard ratio (  ", B[3]/A[3], ")")), log = "y", xaxs = "i")
+    plot(1, 1, type = "n", xlim = c(0, max(time)), ylim = yrange, xlab = "Time", ylab = expression(paste("Sub-hazard ratio / Cause-specific hazard ratio ( ", R[3], ")")), log = "y", xaxs = "i")
     abline(h = 1, lty = 2)
     box()
-    lines(stepfun(time, c(1, B3.A3)), col = gray(0), lwd = 3, cex = 0)
+    lines(stepfun(time, c(1, R3)), col = gray(0), lwd = 3, cex = 0)
     if (!is.null(ci)) {
-      lines(stepfun(time, c(1, ci$B3.A3.lower[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
-      lines(stepfun(time, c(1, ci$B3.A3.upper[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
+      lines(stepfun(time, c(1, ci$R3.lower[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
+      lines(stepfun(time, c(1, ci$R3.upper[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
     }
-    text(xmid, quantile(yrange,0.95), "Event 3", cex = 1.2, col = gray(0))
+    #text(xmid, quantile(yrange,0.95), "Event 3", cex = 1.2, col = gray(0))
+    mtext("Event 3",at=xmid,side=3,line=1,cex=1.2)
   } #endif3
   if(ncol(cifobj)>12){
-    plot(1, 1, type = "n", xlim = c(0, xmax), ylim = yrange, xlab = "Time", ylab = expression(paste("Cause-specific hazard ratio / sub-hazard ratio (  ", B[4]/A[4], ")")), log = "y", xaxs = "i")
+    plot(1, 1, type = "n", xlim = c(0, max(time)), ylim = yrange, xlab = "Time", ylab = expression(paste("Sub-hazard ratio / Cause-specific hazard ratio ( ", R[4], ")")), log = "y", xaxs = "i")
     abline(h = 1, lty = 2)
     box()
-    lines(stepfun(time, c(1, B4.A4)), col = gray(0), lwd = 3, cex = 0)
+    lines(stepfun(time, c(1, R4)), col = gray(0), lwd = 3, cex = 0)
     if (!is.null(ci)) {
-      lines(stepfun(time, c(1, ci$B4.A4.lower[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
-      lines(stepfun(time, c(1, ci$B4.A4.upper[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
+      lines(stepfun(time, c(1, ci$R4.lower[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
+      lines(stepfun(time, c(1, ci$R4.upper[1:ntimes])), col = gray(0), lwd = 2, cex = 0)
     }
-    text(xmid, quantile(yrange,0.95), "Event 4", cex = 1.2, col = gray(0))
+    #text(xmid, quantile(yrange,0.95), "Event 4", cex = 1.2, col = gray(0))
+    mtext("Event 4",at=xmid,side=3,line=1,cex=1.2)
   } #endif4
 }

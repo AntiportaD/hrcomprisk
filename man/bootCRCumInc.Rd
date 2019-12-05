@@ -13,6 +13,6 @@ Estimating CIF per event and exposure level
 \description{
 This function is based on the CRCumInc from this XX package.
 Returns an object type dataframe with the following variables and order:
-col1   col2    col3  col4      
+col1   col2    col3  col4
 ttF1.lower  ttF1.upper  ttF2.lower  ttF2.upper
 }

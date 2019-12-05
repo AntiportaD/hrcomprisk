@@ -47,6 +47,7 @@ datcheck<- function(df, qexit, qevent, qexposure, qentry, qweights, qipwvars, eo
       errors <- c(errors, msg)
     }
   }
+  # Recode factor and tell people about each level?
   if(!(qexit %in% colnames(df))) {
     msg <- paste(qexit, "not in dataset\n")
     errors <- c(errors, msg)

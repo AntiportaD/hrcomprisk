@@ -3,11 +3,13 @@ Type: Package
 Title: A non-Parametric Diagnostic Tool for Competing Risk hazard estimation (Title Case)
 Version: 0.1.0
 Author: Daniel Antiporta <dantiporta@jhu.edu>; 
-        Matthew Matheson <mmathes4@jhu.edu>
-Maintainer: Daniel Antiporta <dantiporta@jhu.edu>
+        Matthew Matheson <mmathes4@jhu.edu>;
+        Derek Ng <dng@jhu.edu>;
+        Alvaro Munoz <amunoz@jhu.edu>
+Maintainer: Daniel Antiporta <dantiporta@jhu.edu>; Matthew Matheson <mmathes4@jhu.edu>
 Description: The CRhaz_dx package provides a non-Parametric Diagnostic Tool for Competing Risk hazard estimation.
-Depends: R (>= 3.0.0),
-	survival
+Depends: R (>= 3.0.0)
+Imports: survival
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

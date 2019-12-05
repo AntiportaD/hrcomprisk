@@ -1,10 +1,13 @@
-#' Name_of_the_data
+#' CKID dataset
 #'
-#' Description_of_the_Data
+#' A dataset containing the prices and other attributes of almost 54,000
+#' diamonds.
 #'
-#' @format A data frame with 10000 rows and 2 variables:
+#' @format A data frame with XXX rows and XXX variables:
 #' \describe{
 #'   \item{Col1}{description of Col1}
 #'   \item{Col2}{description of Col2}
+#'   ...
 #' }
-NULL
+#' @source \url{http://www.diamondse.info/}
+"dat_ckid"
