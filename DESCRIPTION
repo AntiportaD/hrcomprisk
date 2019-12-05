@@ -1,14 +1,22 @@
 Package: hrcompetdx
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A non-Parametric Diagnostic Tool for Competing Risk hazard estimation (Title Case)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Daniel Antiporta <dantiporta@jhu.edu>; 
+        Matthew Matheson <mmathes4@jhu.edu>
+Maintainer: Daniel Antiporta <dantiporta@jhu.edu>
+Description: The CRhaz_dx package provides a non-Parametric Diagnostic Tool for Competing Risk hazard estimation.
+Depends: R (>= 3.0.0),
+	survival
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Import:
+	survival,
 RoxygenNote: 6.1.1
 URL: https://github.com/AntiportaD/hrcompetdx
 BugReports: https://github.com/AntiportaD/hrcompetdx/issues
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
