@@ -1,0 +1,23 @@
+#' Wrapper Function
+#'
+#' Main function
+#' See help for other functions: check.packages, checking_data, data_CIF, fig_cif
+#' @return CRHaz_dx
+#' @export
+CRHaz_dx <- function (df, exit, event, exposure, entry = NULL, weights = NULL, ipwvars=NULL, maxtime = Inf, rep = NULL, eoi = -1) 
+{
+  datcheck(df, deparse(substitute(exit)), deparse(substitute(event)), deparse(substitute(exposure)), deparse(substitute(entry)), deparse(substitute(weights)), ipwvars, eoi = eoi)
+  #Ensure that EOI matches its factor level
+  evt <- df[[deparse(substitute(event))]]
+  if(is.factor(evt) & eoi>0) eoi <- sort(as.numeric(evt[evt == eoi])-1)[1]
+  myCIF <- do.call(CRCumInc,list(df,substitute(exit), substitute(event), substitute(exposure), substitute(entry), substitute(weights), substitute(ipwvars), F))
+  print(attributes(myCIF))
+  if (!is.null(rep)) {
+    boot_myCIF <- do.call(bootCRCumInc,list(df, substitute(exit), substitute(event), substitute(exposure), substitute(entry), substitute(weights), substitute(ipwvars), rep, print.attr=F))
+    plotCIF(myCIF, maxtime = maxtime, ci = boot_myCIF, eoi = eoi)
+  }
+  if (is.null(rep)) {
+    plotCIF(myCIF, maxtime = maxtime, ci = NULL, eoi = eoi)
+  }
+  invisible(myCIF)
+}
