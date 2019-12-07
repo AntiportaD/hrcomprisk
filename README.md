@@ -1,21 +1,21 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# hrcompetdx
+# hrcomprisk
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-The goal of hrcompetdx is to …
+The goal of hrcomprisk is to …
 
 ## Installation
 
-You can install the released version of hrcompetdx from
+You can install the released version of hrcomprisk from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("hrcompetdx")
+install.packages("hrcomprisk")
 ```
 
 ## Example
@@ -23,7 +23,7 @@ install.packages("hrcompetdx")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-library(hrcompetdx)
+library(hrcomprisk)
 ## basic example code
 ```
 

@@ -5,9 +5,9 @@
 #' @importFrom "grDevices"  "gray"
 #' @importFrom "graphics" "abline" "axis" "box" "lines" "mtext" "par" "plot" "text"
 #' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"
-#' @return CRHaz_dx
+#' @return npcrest
 #' @export
-CRHaz_dx <- function (df, exit, event, exposure, entry = NULL, weights = NULL, ipwvars=NULL, maxtime = Inf, rep = NULL, eoi = -1)
+npcrest <- function (df, exit, event, exposure, entry = NULL, weights = NULL, ipwvars=NULL, maxtime = Inf, rep = NULL, eoi = -1)
 {
   datcheck(df, deparse(substitute(exit)), deparse(substitute(event)), deparse(substitute(exposure)), deparse(substitute(entry)), deparse(substitute(weights)), ipwvars, eoi = eoi)
   #Ensure that EOI matches its factor level
