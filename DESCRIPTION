@@ -1,6 +1,6 @@
 Package: hrcomprisk
 Type: Package
-Title: A non-Parametric Diagnostic Tool for Competing Risk hazard estimation (Title Case)
+Title: A non Parametric Diagnostic Tool for Competing Risk hazard estimation (Title Case)
 Version: 0.1.0
 Author: Daniel Antiporta <dantiporta@jhu.edu>; 
         Matthew Matheson <mmathes4@jhu.edu>;
