@@ -2,6 +2,16 @@
 #'
 #' Main function
 #' See help for other functions: check.packages, checking_data, data_CIF, fig_cif
+#' @param df A number.
+#' @param exit A number.
+#' @param event A number.
+#' @param exposure A number.
+#' @param entry A number.
+#' @param weights A number.
+#' @param ipwvars A number.
+#' @param maxtime A number.
+#' @param rep A number.
+#' @param eoi A number.
 #' @importFrom "grDevices"  "gray"
 #' @importFrom "graphics" "abline" "axis" "box" "lines" "mtext" "par" "plot" "text"
 #' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"

@@ -7,6 +7,14 @@
 #' 		 "entry"	: continuous, numeric
 #' 		 "exit"		: continuous, numeric
 #' 		 "event"	: binary (>0), numeric
+#' @param df A number.
+#' @param qexit A number.
+#' @param qevent A number.
+#' @param qexposure A number.
+#' @param qentry A number.
+#' @param qweights A number.
+#' @param qipwvars A number.
+#' @param eoi A number.
 #' @return Check dataset
 
 datcheck<- function(df, qexit, qevent, qexposure, qentry, qweights, qipwvars, eoi = -1){

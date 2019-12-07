@@ -5,6 +5,10 @@
 #' x is data, x default, and z is uppertime (optional) default set to 99999
 #' this needs event, exposure, time, CI0_comp, CI1_comp,CI0inc_1,CI1inc_1, CI0inc_!1,CI1inc_!1
 #' which is the result of CRCumInc(event)
+#' @param cifobj A number.
+#' @param maxtime A number.
+#' @param ci A number.
+#' @param eoi A number.
 #' @importFrom "grDevices" "gray"
 #' @importFrom "graphics" "abline" "axis" "box" "lines" "mtext" "par" "plot" "text"
 #' @return Plot function
@@ -39,9 +43,6 @@ plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
   if(eoi==2) {J1o <- I2o; J1x <- I2x; J2o <- I1o+I3o+I4o; J2x <- I1x+I3x+I4x}
   if(eoi==3) {J1o <- I3o; J1x <- I3x; J2o <- I2o+I1o+I4o; J2x <- I2x+I1x+I4x}
   if(eoi==4) {J1o <- I4o; J1x <- I4x; J2o <- I2o+I3o+I1o; J2x <- I2x+I3x+I1x}
-  if (.Platform$OS.type == "windows") {
-    windows(height = 7.5, width = 10)
-  }
   par(mgp = c(2.25, 0.5, 0), las = 1, mfrow = c(1, 2), mar = c(5.1, 4.1, 2.1, 2.1), cex.lab = 1, cex.axis = 1)
   plot(0, 0, pch = 16, xlim = c(0, max(time)), ylim = c(0, 1), main = "", ylab = "", xlab = "Time", cex.lab = 1, font.main = 12, type = "n", yaxt = "n", xaxs = "i")
   mtext("Cumulative incidence of composite event", at = 0.5, side = 2, line = 1.5, las = 0, col = gray(0.25))
@@ -104,9 +105,6 @@ plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
   if(max(c(I3o,I3x))==0) R3 <- rep(1,ntimes)
   R4 <- (1 - (I1x+I2x+I3x)/(1 - I4x))/(1 - (I1o+I2o+I3o)/(1 - I4o))
   if(max(c(I4o,I4x))==0) R4 <- rep(1,ntimes)
-  if (.Platform$OS.type == "windows") {
-    windows(height = 7.5, width = 10)
-  }
   yrange <- range(list(R1,R2,R3,R4,ci))
   par(mar = c(5.1, 4.1, 2.1, 2.1), mfrow = c(1, 2), pch = -1)
   plot(1, 1, type = "n", xlim = c(0, max(time)), ylim = yrange, xlab = "Time", ylab = expression(paste("Sub-hazard ratio / Cause-specific hazard ratio ( ", R[1], ")")), log = "y", xaxs = "i")
@@ -132,9 +130,6 @@ plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
   mtext("Event 2",at=xmid,side=3,line=1,cex=1.2)
 
   if(ncol(cifobj)>10){
-    if (.Platform$OS.type == "windows") {
-      windows(height = 7.5, width = 10)
-    }
     par(mar = c(5.1, 4.1, 2.1, 2.1), mfrow = c(1, 2), pch = -1)
     plot(1, 1, type = "n", xlim = c(0, max(time)), ylim = yrange, xlab = "Time", ylab = expression(paste("Sub-hazard ratio / Cause-specific hazard ratio ( ", R[3], ")")), log = "y", xaxs = "i")
     abline(h = 1, lty = 2)

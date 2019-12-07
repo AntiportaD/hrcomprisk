@@ -4,6 +4,16 @@
 #' Returns an object type dataframe with the following variables and order:
 #' col1   col2    col3  col4
 #' ttF1.lower  ttF1.upper  ttF2.lower  ttF2.upper
+#' @param df A number.
+#' @param exit A number.
+#' @param event A number.
+#' @param exposure A number.
+#' @param entry A number.
+#' @param weights A number.
+#' @param ipwvars A number.
+#' @param rep A number.
+#' @param seed A number.
+#' @param print.attr A number.
 #' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"
 #' @return Estimating CIF per event and exposure level
 #' @export

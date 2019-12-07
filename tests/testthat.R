@@ -1,5 +1,5 @@
 library(testthat)
-library(hrcompetdx)
+library(hrcomprisk)
 library(survival)
 
-test_check("hrcompetdx")
+test_check("hrcomprisk")

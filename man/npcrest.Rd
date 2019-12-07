@@ -7,6 +7,27 @@
 npcrest(df, exit, event, exposure, entry = NULL, weights = NULL,
   ipwvars = NULL, maxtime = Inf, rep = NULL, eoi = -1)
 }
+\arguments{
+\item{df}{A number.}
+
+\item{exit}{A number.}
+
+\item{event}{A number.}
+
+\item{exposure}{A number.}
+
+\item{entry}{A number.}
+
+\item{weights}{A number.}
+
+\item{ipwvars}{A number.}
+
+\item{maxtime}{A number.}
+
+\item{rep}{A number.}
+
+\item{eoi}{A number.}
+}
 \value{
 npcrest
 }

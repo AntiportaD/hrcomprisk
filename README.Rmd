@@ -18,14 +18,15 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of hrcomprisk is to ...
+The goal of hrcomprisk is to estimate Nonparametric Cumulative-Incidence Based Estimation of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios
 
 ## Installation
 
-You can install the released version of hrcomprisk from [CRAN](https://CRAN.R-project.org) with:
+You can install the version 0.1.0 of `hrcomprisk` from [Github](https://github.com) with:
 
 ``` r
-install.packages("hrcomprisk")
+library(devtools)
+install_github("AntiportaD/hrcomprisk")
 ```
 
 ## Example

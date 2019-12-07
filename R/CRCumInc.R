@@ -4,7 +4,16 @@
 #' Returns an object type dataframe with the following variables and order:
 #' col1		col2		col3	col4		col5	...
 #' event	exposure	time	CI0inc_i	CI1inc_i ...
+#' @param df A number.
+#' @param time A number.
+#' @param event A number.
+#' @param exposed A number.
+#' @param entry A number.
+#' @param weights A number.
+#' @param ipwvars A number.
+#' @param print.attr A number.
 #' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"
+#' @importFrom "survival" "survfit" "Surv"
 #' @return Estimating CIF per event and exposure level
 #' @export
 CRCumInc <- function(df,time,event,exposed,entry=NULL,weights=NULL,ipwvars=NULL,print.attr=T){
