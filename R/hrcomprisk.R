@@ -6,5 +6,7 @@
 #' The hrcomprisk functions ...
 #'
 #' @docType package
+#' @references Ng paper 2019/20, Muñoz book chapter and relevant literature
+#' @author Daniel Antiporta, Matthew Matheson, Derek Ng and Alvaro Muñoz
 #' @name hrcomprisk
 NULL

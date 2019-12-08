@@ -8,21 +8,21 @@ CRCumInc(df, time, event, exposed, entry = NULL, weights = NULL,
   ipwvars = NULL, print.attr = T)
 }
 \arguments{
-\item{df}{A number.}
+\item{df}{A data frame containing, at a minimum, exit, event, and exposure.}
 
-\item{time}{A number.}
+\item{time}{Name of the column in df containing times of event or censoring.}
 
-\item{event}{A number.}
+\item{event}{Name of the column in df containing codes for censoring (0) and event types (1-4). Analysis of more than 4 competing events is not supported by this function.}
 
-\item{exposed}{A number.}
+\item{exposed}{Name of the column in df containing a binary (0/1) exposure variable for stratification.}
 
-\item{entry}{A number.}
+\item{entry}{Name of the column in df containing late entry times.}
 
-\item{weights}{A number.}
+\item{weights}{Name of the column in df containing user-supplied weights. If ipwvars is utilized, this argument is ignored.}
 
-\item{ipwvars}{A number.}
+\item{ipwvars}{A vector of names of columns in `df` containing predictor variables for building a propensity score model for exposure and creating standardized inverse probability weights using this model. Overrides the weights argument.}
 
-\item{print.attr}{A number.}
+\item{print.attr}{A logical value `TRUE/FALSE` if results needed to be returned in console.}
 }
 \value{
 Estimating CIF per event and exposure level

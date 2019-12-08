@@ -6,7 +6,7 @@
 \title{CKID dataset}
 \format{A data frame with 626 rows and 13 variables:
 \describe{
-  \item{b1nb0}{description of Col1}
+  \item{b1nb0}{Binary variable of Race where black=1 and non-black=0}
   \item{entry}{description of Col2}
   \item{event}{description of Col2}
   \item{exit}{description of Col2}

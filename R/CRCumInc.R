@@ -4,18 +4,19 @@
 #' Returns an object type dataframe with the following variables and order:
 #' col1		col2		col3	col4		col5	...
 #' event	exposure	time	CI0inc_i	CI1inc_i ...
-#' @param df A number.
-#' @param time A number.
-#' @param event A number.
-#' @param exposed A number.
-#' @param entry A number.
-#' @param weights A number.
-#' @param ipwvars A number.
-#' @param print.attr A number.
+#' @param df A data frame containing, at a minimum, exit, event, and exposure.
+#' @param time Name of the column in df containing times of event or censoring.
+#' @param event Name of the column in df containing codes for censoring (0) and event types (1-4). Analysis of more than 4 competing events is not supported by this function.
+#' @param exposed Name of the column in df containing a binary (0/1) exposure variable for stratification.
+#' @param entry Name of the column in df containing late entry times.
+#' @param weights Name of the column in df containing user-supplied weights. If ipwvars is utilized, this argument is ignored.
+#' @param ipwvars A vector of names of columns in `df` containing predictor variables for building a propensity score model for exposure and creating standardized inverse probability weights using this model. Overrides the weights argument.
+#' @param print.attr A logical value `TRUE/FALSE` if results needed to be returned in console.
 #' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"
 #' @importFrom "survival" "survfit" "Surv"
 #' @return Estimating CIF per event and exposure level
 #' @export
+
 CRCumInc <- function(df,time,event,exposed,entry=NULL,weights=NULL,ipwvars=NULL,print.attr=T){
   time <- round(df[[deparse(substitute(time))]], 4)
   event <- df[[deparse(substitute(event))]]

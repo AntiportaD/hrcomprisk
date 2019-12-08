@@ -8,21 +8,21 @@ datcheck(df, qexit, qevent, qexposure, qentry, qweights, qipwvars,
   eoi = -1)
 }
 \arguments{
-\item{df}{A number.}
+\item{df}{A data frame containing, at a minimum, exit, event, and exposure.}
 
-\item{qexit}{A number.}
+\item{qexit}{Name of the column in df containing times of event or censoring.}
 
-\item{qevent}{A number.}
+\item{qevent}{Name of the column in df containing codes for censoring (0) and event types (1-4). Analysis of more than 4 competing events is not supported by this function.}
 
-\item{qexposure}{A number.}
+\item{qexposure}{Name of the column in df containing a binary (0/1) exposure variable for stratification.}
 
-\item{qentry}{A number.}
+\item{qentry}{Name of the column in df containing late entry times.}
 
-\item{qweights}{A number.}
+\item{qweights}{Name of the column in df containing user-supplied weights. If ipwvars is utilized, this argument is ignored.}
 
-\item{qipwvars}{A number.}
+\item{qipwvars}{A vector of names of columns in `df` containing predictor variables for building a propensity score model for exposure and creating standardized inverse probability weights using this model. Overrides the weights argument.}
 
-\item{eoi}{A number.}
+\item{eoi}{Event number for the event of interest, useful when more than two events exist. If utilized, only two cumulative incidence curves will be plotted: one for the event of interest, and one for the composite of all competing events. Each event will still have its sHR/csHR ratio plotted.}
 }
 \value{
 Check dataset

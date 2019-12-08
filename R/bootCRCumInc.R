@@ -4,19 +4,20 @@
 #' Returns an object type dataframe with the following variables and order:
 #' col1   col2    col3  col4
 #' ttF1.lower  ttF1.upper  ttF2.lower  ttF2.upper
-#' @param df A number.
-#' @param exit A number.
-#' @param event A number.
-#' @param exposure A number.
-#' @param entry A number.
-#' @param weights A number.
-#' @param ipwvars A number.
-#' @param rep A number.
-#' @param seed A number.
-#' @param print.attr A number.
+#' @param df A data frame containing, at a minimum, exit, event, and exposure.
+#' @param exit Name of the column in df containing times of event or censoring.
+#' @param event Name of the column in df containing codes for censoring (0) and event types (1-4). Analysis of more than 4 competing events is not supported by this function.
+#' @param exposure Name of the column in df containing a binary (0/1) exposure variable for stratification.
+#' @param entry Name of the column in df containing late entry times.
+#' @param weights Name of the column in df containing user-supplied weights. If ipwvars is utilized, this argument is ignored.
+#' @param ipwvars A vector of names of columns in `df` containing predictor variables for building a propensity score model for exposure and creating standardized inverse probability weights using this model. Overrides the weights argument.
+#' @param rep Number of replicates for bootstrapping if confidence intervals for the sHR/csHR estimate are desired. See more details on bootstrapping below.
+#' @param seed A seed number start for the bootstrap estimation.
+#' @param print.attr A `TRUE/FALSE`` statement if results needed to be returned in console.
 #' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"
 #' @return Estimating CIF per event and exposure level
 #' @export
+
 bootCRCumInc <- function (df, exit, event, exposure, entry = NULL, weights = NULL, ipwvars=NULL, rep = 0, seed=54321, print.attr=T)
 {
   df$exit <- df[[deparse(substitute(exit))]]

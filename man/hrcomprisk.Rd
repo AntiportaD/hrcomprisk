@@ -13,3 +13,9 @@ The hrcomprisk package provides a non-Parametric Diagnostic Tool for Competing R
 The hrcomprisk functions ...
 }
 
+\references{
+Ng paper 2019/20, Muñoz book chapter and relevant literature
+}
+\author{
+Daniel Antiporta, Matthew Matheson, Derek Ng and Alvaro Muñoz
+}

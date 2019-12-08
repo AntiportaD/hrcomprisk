@@ -8,25 +8,25 @@ bootCRCumInc(df, exit, event, exposure, entry = NULL, weights = NULL,
   ipwvars = NULL, rep = 0, seed = 54321, print.attr = T)
 }
 \arguments{
-\item{df}{A number.}
+\item{df}{A data frame containing, at a minimum, exit, event, and exposure.}
 
-\item{exit}{A number.}
+\item{exit}{Name of the column in df containing times of event or censoring.}
 
-\item{event}{A number.}
+\item{event}{Name of the column in df containing codes for censoring (0) and event types (1-4). Analysis of more than 4 competing events is not supported by this function.}
 
-\item{exposure}{A number.}
+\item{exposure}{Name of the column in df containing a binary (0/1) exposure variable for stratification.}
 
-\item{entry}{A number.}
+\item{entry}{Name of the column in df containing late entry times.}
 
-\item{weights}{A number.}
+\item{weights}{Name of the column in df containing user-supplied weights. If ipwvars is utilized, this argument is ignored.}
 
-\item{ipwvars}{A number.}
+\item{ipwvars}{A vector of names of columns in `df` containing predictor variables for building a propensity score model for exposure and creating standardized inverse probability weights using this model. Overrides the weights argument.}
 
-\item{rep}{A number.}
+\item{rep}{Number of replicates for bootstrapping if confidence intervals for the sHR/csHR estimate are desired. See more details on bootstrapping below.}
 
-\item{seed}{A number.}
+\item{seed}{A seed number start for the bootstrap estimation.}
 
-\item{print.attr}{A number.}
+\item{print.attr}{A `TRUE/FALSE`` statement if results needed to be returned in console.}
 }
 \value{
 Estimating CIF per event and exposure level
