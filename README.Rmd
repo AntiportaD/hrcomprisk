@@ -29,27 +29,42 @@ library(devtools)
 install_github("AntiportaD/hrcomprisk")
 ```
 
-## Example
+## Using a formatted data set to apply the `hrcomprsk` package
 
-This is a basic example which shows you how to solve a common problem:
+You can use the dataset provided by the authors from the [CKiD study](https://statepi.jhsph.edu/ckid/, wich has the necessary variables to run the package.
 
 ```{r example}
 library(hrcomprisk)
-## basic example code
+data <- hrcomprisk::dat_ckid
+dim(data) #dimensions
+names(data) #varible names
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+The package will create a `data.frame` object with the cumulative incidence of each competing risk for each exposure group. We can use the `CRCumInc` fuction.
 
-```{r cars}
-summary(cars)
+```{r CRCumInc_example}
+mydat.CIF<-CRCumInc(data, exit, event, exposed=b1nb0, print.attr = T)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+We can also obtain two different plots: the Cumulative Incidence of the both events of interest overall and by exposure level, and, 2. The ratios of Hazard rations (sub-distribution Hazard Ratio and cause-specific Hazard Ratio) by event.
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r plotCIF, echo = FALSE, fig.height=8, fig.width=10}
+plotCIF(mydat.CIF, maxtime = 20, eoi = 1)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+In order to get confidence intervals to the ratio of Hazard Ratios (Rk), we can use the `bootCRCumInc` function:
+```{r boot_example}
+ciCIF<-bootCRCumInc(data, exit, event, exposure=b1nb0, rep=100, print.attr = T)
+```
+
+Finally, we can use this new data to add the 95% Confidence Intervals to the previous plot using again the `plotCIF` function.
+
+```{r plot_ci, echo = FALSE, fig.height=8, fig.width=10}
+plotCIF(mydat.CIF, maxtime = 20, ci = ciCIF, eoi=1)
+```
+
+The package also offers a wrapper function (`npcrest`) to do all this analyses in one step.
+
+```{r npcrest, fig.height=8, fig.width=10}
+npcrest(data, exit, event, exposure=b1nb0,  rep=100, eoi=1)
+```

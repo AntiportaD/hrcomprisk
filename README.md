@@ -21,35 +21,134 @@ library(devtools)
 install_github("AntiportaD/hrcomprisk")
 ```
 
-## Example
+## Using a formatted data set to apply the `hrcomprsk` package
 
-This is a basic example which shows you how to solve a common problem:
+You can use the dataset provided by the authors from the \[CKiD
+study\](<https://statepi.jhsph.edu/ckid/>, wich has the necessary
+variables to run the package.
 
 ``` r
 library(hrcomprisk)
-## basic example code
+data <- hrcomprisk::dat_ckid
+dim(data) #dimensions
+#> [1] 626  13
+names(data) #varible names
+#>  [1] "b1nb0"        "event"        "male1fe0"     "incomelt30"  
+#>  [5] "incomegt75"   "lps"          "foodassist"   "public"      
+#>  [9] "matedultcoll" "privatemd"    "entry"        "exit"        
+#> [13] "inckd"
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+The package will create a `data.frame` object with the cumulative
+incidence of each competing risk for each exposure group. We can use the
+`CRCumInc` fuction.
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+mydat.CIF<-CRCumInc(data, exit, event, exposed=b1nb0, print.attr = T)
+#> $names
+#> [1] "event"       "exposure"    "time"        "CIoinc_comp" "CIxinc_comp"
+#> [6] "CIoinc_1"    "CIxinc_1"    "CIoinc_2"    "CIxinc_2"   
+#> 
+#> $class
+#> [1] "data.frame"
+#> 
+#> $row.names
+#>   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+#>  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
+#>  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
+#>  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
+#>  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
+#>  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101 102
+#> [103] 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119
+#> [120] 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136
+#> [137] 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+#> [154] 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170
+#> [171] 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
+We can also obtain two different plots: the Cumulative Incidence of the
+both events of interest overall and by exposure level, and, 2. The
+ratios of Hazard rations (sub-distribution Hazard Ratio and
+cause-specific Hazard Ratio) by
+event.
 
-You can also embed plots, for example:
+<img src="man/figures/README-plotCIF-1.png" width="100%" /><img src="man/figures/README-plotCIF-2.png" width="100%" />
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+In order to get confidence intervals to the ratio of Hazard Ratios (Rk),
+we can use the `bootCRCumInc`
+function:
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
+``` r
+ciCIF<-bootCRCumInc(data, exit, event, exposure=b1nb0, rep=100, print.attr = T)
+#> $names
+#> [1] "R1.lower" "R1.upper" "R2.lower" "R2.upper"
+#> 
+#> $class
+#> [1] "data.frame"
+#> 
+#> $row.names
+#>   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+#>  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
+#>  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
+#>  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
+#>  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
+#>  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101 102
+#> [103] 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119
+#> [120] 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136
+#> [137] 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+#> [154] 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170
+#> [171] 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187
+```
+
+Finally, we can use this new data to add the 95% Confidence Intervals to
+the previous plot using again the `plotCIF`
+function.
+
+<img src="man/figures/README-plot_ci-1.png" width="100%" /><img src="man/figures/README-plot_ci-2.png" width="100%" />
+
+The package also offers a wrapper function (`npcrest`) to do all this
+analyses in one step.
+
+``` r
+npcrest(data, exit, event, exposure=b1nb0,  rep=100, eoi=1)
+#> $names
+#> [1] "event"       "exposure"    "time"        "CIoinc_comp" "CIxinc_comp"
+#> [6] "CIoinc_1"    "CIxinc_1"    "CIoinc_2"    "CIxinc_2"   
+#> 
+#> $class
+#> [1] "data.frame"
+#> 
+#> $row.names
+#>   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+#>  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
+#>  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
+#>  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
+#>  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
+#>  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101 102
+#> [103] 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119
+#> [120] 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136
+#> [137] 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+#> [154] 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170
+#> [171] 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187
+#> 
+#> $names
+#> [1] "R1.lower" "R1.upper" "R2.lower" "R2.upper"
+#> 
+#> $class
+#> [1] "data.frame"
+#> 
+#> $row.names
+#>   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
+#>  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
+#>  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
+#>  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
+#>  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
+#>  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101 102
+#> [103] 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119
+#> [120] 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136
+#> [137] 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
+#> [154] 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170
+#> [171] 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187
+```
+
+<img src="man/figures/README-npcrest-1.png" width="100%" /><img src="man/figures/README-npcrest-2.png" width="100%" />
