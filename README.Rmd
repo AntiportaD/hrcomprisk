@@ -46,7 +46,7 @@ The package will create a `data.frame` object with the cumulative incidence of e
 mydat.CIF<-CRCumInc(data, exit, event, exposed=b1nb0, print.attr = T)
 ```
 
-We can also obtain two different plots: the Cumulative Incidence of the both events of interest overall and by exposure level, and, 2. The ratios of Hazard rations (sub-distribution Hazard Ratio and cause-specific Hazard Ratio) by event.
+We can also obtain two different plots: 1. the Cumulative Incidence of the both events of interest overall and by exposure level, and, 2. The ratios of Hazard rations (sub-distribution Hazard Ratio and cause-specific Hazard Ratio) by event.
 
 ```{r plotCIF, echo = FALSE, fig.height=8, fig.width=10}
 plotCIF(mydat.CIF, maxtime = 20, eoi = 1)

@@ -66,8 +66,8 @@ mydat.CIF<-CRCumInc(data, exit, event, exposed=b1nb0, print.attr = T)
 #> [171] 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187
 ```
 
-We can also obtain two different plots: the Cumulative Incidence of the
-both events of interest overall and by exposure level, and, 2. The
+We can also obtain two different plots: 1. the Cumulative Incidence of
+the both events of interest overall and by exposure level, and, 2. The
 ratios of Hazard rations (sub-distribution Hazard Ratio and
 cause-specific Hazard Ratio) by
 event.
