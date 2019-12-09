@@ -23,8 +23,8 @@ install_github("AntiportaD/hrcomprisk")
 
 ## Using a formatted data set to apply the `hrcomprsk` package
 
-You can use the dataset provided by the authors from the \[CKiD
-study\](<https://statepi.jhsph.edu/ckid/>, wich has the necessary
+You can use the dataset provided by the authors from the [CKiD
+study](https://statepi.jhsph.edu/ckid/), wich has the necessary
 variables to run the package.
 
 ``` r
@@ -41,10 +41,11 @@ names(data) #varible names
 
 The package will create a `data.frame` object with the cumulative
 incidence of each competing risk for each exposure group. We can use the
-`CRCumInc` fuction.
+`CRCumInc`
+fuction.
 
 ``` r
-mydat.CIF<-CRCumInc(data, exit, event, exposed=b1nb0, print.attr = T)
+mydat.CIF<-CRCumInc(df=data, time=exit, event=event, exposed=b1nb0, print.attr=T)
 #> $names
 #> [1] "event"       "exposure"    "time"        "CIoinc_comp" "CIxinc_comp"
 #> [6] "CIoinc_1"    "CIxinc_1"    "CIoinc_2"    "CIxinc_2"   
@@ -66,20 +67,32 @@ mydat.CIF<-CRCumInc(data, exit, event, exposed=b1nb0, print.attr = T)
 #> [171] 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187
 ```
 
-We can also obtain two different plots: 1. the Cumulative Incidence of
-the both events of interest overall and by exposure level, and, 2. The
-ratios of Hazard rations (sub-distribution Hazard Ratio and
-cause-specific Hazard Ratio) by
+## Using a the output to create Plots of CIFs and the Ratio of Hazard Ratios (Rk)
+
+We can also obtain two different plots using the `plotCIF` function:
+
+1.  The Cumulative Incidence of the both events of interest overall and
+    by exposure level, and
+2.  The ratios of Hazard rations (sub-distribution Hazard Ratio and
+    cause-specific Hazard Ratio) by
 event.
 
+<!-- end list -->
+
+``` r
+plotCIF(cifobj=mydat.CIF, maxtime = 20, eoi = 1)
+```
+
 <img src="man/figures/README-plotCIF-1.png" width="100%" /><img src="man/figures/README-plotCIF-2.png" width="100%" />
+\#\# Bootstrapping the data to get 95% Confidence Intervals for the
+Ratio of Hazard Ratios (Rk)
 
 In order to get confidence intervals to the ratio of Hazard Ratios (Rk),
 we can use the `bootCRCumInc`
 function:
 
 ``` r
-ciCIF<-bootCRCumInc(data, exit, event, exposure=b1nb0, rep=100, print.attr = T)
+ciCIF<-bootCRCumInc(df=data, exit=exit, event=event, exposure=b1nb0, rep=100, print.attr=T)
 #> $names
 #> [1] "R1.lower" "R1.upper" "R2.lower" "R2.upper"
 #> 
@@ -104,13 +117,19 @@ Finally, we can use this new data to add the 95% Confidence Intervals to
 the previous plot using again the `plotCIF`
 function.
 
+``` r
+plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF, eoi=1)
+```
+
 <img src="man/figures/README-plot_ci-1.png" width="100%" /><img src="man/figures/README-plot_ci-2.png" width="100%" />
+\#\# The wrapper function `npcrest`
 
 The package also offers a wrapper function (`npcrest`) to do all this
-analyses in one step.
+analyses in one
+step.
 
 ``` r
-npcrest(data, exit, event, exposure=b1nb0,  rep=100, eoi=1)
+npcrest(df=data, exit=exit, event=event, exposure=b1nb0,  rep=100, eoi=1)
 #> $names
 #> [1] "event"       "exposure"    "time"        "CIoinc_comp" "CIxinc_comp"
 #> [6] "CIoinc_1"    "CIxinc_1"    "CIoinc_2"    "CIxinc_2"   
