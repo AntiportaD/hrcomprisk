@@ -60,6 +60,7 @@ We can also obtain two different plots using the `plotCIF` function:
 ```{r plotCIF}
 plotCIF(cifobj=mydat.CIF, maxtime = 20, eoi = 1)
 ```
+
 ## Bootstrapping the data to get 95% Confidence Intervals for the Ratio of Hazard Ratios (Rk) 
 
 In order to get confidence intervals to the ratio of Hazard Ratios (Rk), we can use the `bootCRCumInc` function:
@@ -72,6 +73,7 @@ Finally, we can use this new data to add the 95% Confidence Intervals to the pre
 ```{r plot_ci}
 plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF, eoi=1)
 ```
+
 ## The wrapper function `npcrest` 
 
 The package also offers a wrapper function (`npcrest`) to do all this analyses in one step.

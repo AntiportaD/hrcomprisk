@@ -84,8 +84,8 @@ plotCIF(cifobj=mydat.CIF, maxtime = 20, eoi = 1)
 ```
 
 <img src="man/figures/README-plotCIF-1.png" width="100%" /><img src="man/figures/README-plotCIF-2.png" width="100%" />
-\#\# Bootstrapping the data to get 95% Confidence Intervals for the
-Ratio of Hazard Ratios (Rk)
+
+## Bootstrapping the data to get 95% Confidence Intervals for the Ratio of Hazard Ratios (Rk)
 
 In order to get confidence intervals to the ratio of Hazard Ratios (Rk),
 we can use the `bootCRCumInc`
@@ -122,7 +122,8 @@ plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF, eoi=1)
 ```
 
 <img src="man/figures/README-plot_ci-1.png" width="100%" /><img src="man/figures/README-plot_ci-2.png" width="100%" />
-\#\# The wrapper function `npcrest`
+
+## The wrapper function `npcrest`
 
 The package also offers a wrapper function (`npcrest`) to do all this
 analyses in one
