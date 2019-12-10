@@ -5,7 +5,8 @@
 \title{Nonparametric Cumulative-Incidence Based Estimation of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios}
 \usage{
 npcrest(df, exit, event, exposure, entry = NULL, weights = NULL,
-  ipwvars = NULL, maxtime = Inf, rep = NULL, eoi = -1)
+  ipwvars = NULL, maxtime = Inf, rep = NULL, eoi = -1,
+  print.attr = T)
 }
 \arguments{
 \item{df}{A data frame containing, at a minimum, exit, event, and exposure.}
@@ -27,6 +28,8 @@ npcrest(df, exit, event, exposure, entry = NULL, weights = NULL,
 \item{rep}{Number of replicates for bootstrapping if confidence intervals for the sHR/csHR estimate are desired. See more details on bootstrapping below.}
 
 \item{eoi}{Event number for the event of interest, useful when more than two events exist. If utilized, only two cumulative incidence curves will be plotted: one for the event of interest, and one for the composite of all competing events. Each event will still have its sHR/csHR ratio plotted.}
+
+\item{print.attr}{A logical value `TRUE/FALSE` if results needed to be returned in console.}
 }
 \value{
 npcrest

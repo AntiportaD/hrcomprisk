@@ -5,7 +5,7 @@
 \title{Bootstrap for estimated CIF}
 \usage{
 bootCRCumInc(df, exit, event, exposure, entry = NULL, weights = NULL,
-  ipwvars = NULL, rep = 0, seed = 54321, print.attr = T)
+  ipwvars = NULL, rep = 0, print.attr = T, seed = 54321)
 }
 \arguments{
 \item{df}{A data frame containing, at a minimum, exit, event, and exposure.}
@@ -24,9 +24,9 @@ bootCRCumInc(df, exit, event, exposure, entry = NULL, weights = NULL,
 
 \item{rep}{Number of replicates for bootstrapping if confidence intervals for the sHR/csHR estimate are desired. See more details on bootstrapping below.}
 
-\item{seed}{A seed number start for the bootstrap estimation.}
-
 \item{print.attr}{A `TRUE/FALSE`` statement if results needed to be returned in console.}
+
+\item{seed}{A seed number start for the bootstrap estimation.}
 }
 \value{
 Estimating CIF per event and exposure level

@@ -79,7 +79,7 @@ plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF)
 The package also offers a wrapper function (`npcrest`) to do all this analyses in one step.
 
 ```{r npcrest}
-npcrest(df=data, exit=exit, event=event, exposure=b1nb0,rep=100, maxtime = 20)
+npcrest(df=data, exit=exit, event=event, exposure=b1nb0,rep=100, maxtime=20, print.attr=T)
 ```
 
 ## References

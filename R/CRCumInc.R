@@ -1,4 +1,4 @@
-#' Estimating CIF
+#' Estimation of Cumulative Incidence (CIF) of competing events
 #'
 #' This function is based on the CIF estimated by the survival package
 #' Returns an object type dataframe with the following variables and order:
@@ -39,7 +39,7 @@ CRCumInc <- function(df,time,event,exposed,entry=NULL,weights=NULL,ipwvars=NULL,
     ipwmodel <- glm(as.formula(ipwdf), family="binomial", data=ipwdf)
     #fweights <- formula(paste(deparse(substitute(exposed)) , " ~ ", paste(ipwvars, collapse=" + ")))
     #ipwmodel <- glm(fweights, family="binomial", df)
-    print(summary(ipwmodel))
+    #print(summary(ipwmodel))
     ipwpred <- predict(ipwmodel,type="response")
     sipw <- as.numeric()
     sipw[exposed==1] <- 1/ipwpred[exposed==1] * (sum(exposed==1)/length(exposed))
@@ -126,6 +126,26 @@ CRCumInc <- function(df,time,event,exposed,entry=NULL,weights=NULL,ipwvars=NULL,
     names(myCIF)[l]<-paste0("CIxinc_", i) #name follows Cumulative Incidence among the EXPOSED for EVENT 'i'
     names(myCIF)[j]<-paste0("CIoinc_", i) #name follows Cumulative Incidence among the UNEXPOSED for EVENT 'i'
   }
-  if(print.attr) print(attributes(myCIF)[1:2])
+  CIx3 <- myCIF$CIxinc_3
+  if(is.null(CIx3)) CIx3 <- 0*myCIF$CIxinc_1
+  CIo3 <- myCIF$CIoinc_3
+  if(is.null(CIo3)) CIo3 <- 0*myCIF$CIxinc_1
+  CIx4 <- myCIF$CIxinc_4
+  if(is.null(CIx4)) CIx4 <- 0*myCIF$CIxinc_1
+  CIo4 <- myCIF$CIoinc_4
+  if(is.null(CIo4)) CIo4 <- 0*myCIF$CIxinc_1
+  myCIF$R1 <- (1 - (myCIF$CIxinc_2+CIx3+CIx4)/(1 - myCIF$CIxinc_1))/(1 - (myCIF$CIoinc_2+CIo3+CIo4)/(1 - myCIF$CIoinc_1))
+  myCIF$R1[!is.finite(myCIF$R1)] <- 99 #just in case
+  myCIF$R2 <- (1 - (myCIF$CIxinc_1+CIx3+CIx4)/(1 - myCIF$CIxinc_2))/(1 - (myCIF$CIoinc_1+CIo3+CIo4)/(1 - myCIF$CIoinc_2))
+  myCIF$R2[!is.finite(myCIF$R2)] <- 99
+  if(nevents>=3){
+    myCIF$R3 <- (1 - (myCIF$CIxinc_1+myCIF$CIxinc_2+CIx4)/(1 - CIx3))/(1 - (myCIF$CIoinc_1+myCIF$CIoinc_2+CIo4)/(1 - CIo3))
+    myCIF$R3[!is.finite(myCIF$R3)] <- 99
+  }
+  if(nevents==4){
+    myCIF$R4 <- (1 - (myCIF$CIxinc_1+myCIF$CIxinc_2+CIx3)/(1 - CIx4))/(1 - (myCIF$CIoinc_1+myCIF$CIoinc_2+CIo3)/(1 - CIo4))
+    myCIF$R4[!is.finite(myCIF$R4)] <- 99
+  }
+  if(print.attr) print(attributes(myCIF)[-2])
   return(myCIF)
 }

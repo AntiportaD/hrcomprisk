@@ -18,29 +18,29 @@
 #' @param maxtime Largest time to display on the x-axis of all output plots. As data can become sparse and thus more widely variable at times get large, this argument may be used to restrict plots to a range of the data that is discerned to be more accurate and reliable.
 #' @param rep Number of replicates for bootstrapping if confidence intervals for the sHR/csHR estimate are desired. See more details on bootstrapping below.
 #' @param eoi Event number for the event of interest, useful when more than two events exist. If utilized, only two cumulative incidence curves will be plotted: one for the event of interest, and one for the composite of all competing events. Each event will still have its sHR/csHR ratio plotted.
+#' @param print.attr A logical value `TRUE/FALSE` if results needed to be returned in console.
 #' @importFrom "grDevices"  "gray"
 #' @importFrom "graphics" "abline" "axis" "box" "lines" "mtext" "par" "plot" "text"
 #' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"
 #' @return npcrest
 #'
 #' @export
-npcrest <- function (df, exit, event, exposure, entry = NULL, weights = NULL, ipwvars=NULL, maxtime = Inf, rep = NULL, eoi = -1)
+npcrest <- function (df, exit, event, exposure, entry = NULL, weights = NULL, ipwvars=NULL, maxtime = Inf, rep = NULL, eoi = -1, print.attr=T)
 {
   datcheck(df, deparse(substitute(exit)), deparse(substitute(event)), deparse(substitute(exposure)), deparse(substitute(entry)), deparse(substitute(weights)), ipwvars, eoi = eoi)
   #Ensure that EOI matches its factor level
   evt <- df[[deparse(substitute(event))]]
   if(is.factor(evt) & eoi>0) eoi <- (as.numeric(evt[evt == eoi])-1)[1]
-  myCIF <- do.call(CRCumInc,list(df,substitute(exit), substitute(event), substitute(exposure), substitute(entry), substitute(weights), substitute(ipwvars)))
+  myCIF <- do.call(CRCumInc,list(df,substitute(exit), substitute(event), substitute(exposure), substitute(entry), substitute(weights), substitute(ipwvars), substitute(print.attr)))
   if (!is.null(rep)) {
-    boot_myCIF <- do.call(bootCRCumInc,list(df, substitute(exit), substitute(event), substitute(exposure), substitute(entry), substitute(weights), substitute(ipwvars), rep))
-    myplots<-plotCIF(myCIF, maxtime = maxtime, ci = boot_myCIF, eoi = eoi)
+    boot_myCIF <- do.call(bootCRCumInc,list(df, substitute(exit), substitute(event), substitute(exposure), substitute(entry), substitute(weights), substitute(ipwvars), rep, substitute(print.attr)))
+    plots <- plotCIF(myCIF, maxtime = maxtime, ci = boot_myCIF, eoi = eoi)
   }
   if (is.null(rep)) {
-    myplots<-plotCIF(myCIF, maxtime = maxtime, ci = NULL, eoi = eoi)
+    plots <- plotCIF(myCIF, maxtime = maxtime, ci = NULL, eoi = eoi)
   }
-  myresults <- list(myCIF=NA, plot1 = NA, plot2 = NA)
-  myresults$myCIF <- myCIF
-  myresults$plot1 <- myplots$plot1
-  myresults$plot2 <- myplots$plot2
-  invisible(myresults)
+  ret <- NULL
+  ret$cuminc <- myCIF
+  ret$plots <- plots
+  invisible(ret)
 }

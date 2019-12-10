@@ -2,7 +2,7 @@
 % Please edit documentation in R/CRCumInc.R
 \name{CRCumInc}
 \alias{CRCumInc}
-\title{Estimating CIF}
+\title{Estimation of Cumulative Incidence (CIF) of competing events}
 \usage{
 CRCumInc(df, time, event, exposed, entry = NULL, weights = NULL,
   ipwvars = NULL, print.attr = T)

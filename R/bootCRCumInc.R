@@ -12,13 +12,13 @@
 #' @param weights Name of the column in df containing user-supplied weights. If ipwvars is utilized, this argument is ignored.
 #' @param ipwvars A vector of names of columns in `df` containing predictor variables for building a propensity score model for exposure and creating standardized inverse probability weights using this model. Overrides the weights argument.
 #' @param rep Number of replicates for bootstrapping if confidence intervals for the sHR/csHR estimate are desired. See more details on bootstrapping below.
-#' @param seed A seed number start for the bootstrap estimation.
 #' @param print.attr A `TRUE/FALSE`` statement if results needed to be returned in console.
+#' @param seed A seed number start for the bootstrap estimation.
 #' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"
 #' @return Estimating CIF per event and exposure level
 #' @export
 
-bootCRCumInc <- function (df, exit, event, exposure, entry = NULL, weights = NULL, ipwvars=NULL, rep = 0, seed=54321, print.attr=T)
+bootCRCumInc <- function (df, exit, event, exposure, entry = NULL, weights = NULL, ipwvars=NULL, rep = 0, print.attr=T, seed=54321)
 {
   df$exit <- df[[deparse(substitute(exit))]]
   df$event <- df[[deparse(substitute(event))]]
@@ -52,36 +52,14 @@ bootCRCumInc <- function (df, exit, event, exposure, entry = NULL, weights = NUL
     dato <- df[which(df$exposure == 0), ]
     for (b in 1:nboot) {
       b.data <- rbind(datx[sample(1:nrow(datx),replace=T),],dato[sample(1:nrow(dato),replace=T),])
-      b.data$exit <- jitter(b.data$exit) #needed???
+      b.data$exit <- jitter(b.data$exit)
 
-
-      #dat_boot <- CRCumInc(b.data, exit, event, exposure, entry, weights, ipwvars, print.attr=F)
       dat_boot <- do.call(CRCumInc,list(b.data,substitute(exit), substitute(event), substitute(exposure), substitute(entry), substitute(weights), substitute(ipwvars), F))
       ttx.all[[b]] <- dat_boot$time
-      bI1o.all[[b]] <- dat_boot$CIoinc_1
-      bI2o.all[[b]] <- dat_boot$CIoinc_2
-      if(e3) bI3o.all[[b]] <- dat_boot$CIoinc_3
-      else bI3o.all[[b]] <- 0*bI2o.all[[b]]
-      if(e4) bI4o.all[[b]] <- dat_boot$CIoinc_4
-      else bI4o.all[[b]] <- 0*bI2o.all[[b]]
-      bI1x.all[[b]] <- dat_boot$CIxinc_1
-      bI2x.all[[b]] <- dat_boot$CIxinc_2
-      if(e3) bI3x.all[[b]] <- dat_boot$CIxinc_3
-      else bI3x.all[[b]] <- 0*bI2x.all[[b]]
-      if(e4) bI4x.all[[b]] <- dat_boot$CIxinc_4
-      else bI4x.all[[b]] <- 0*bI2x.all[[b]]
-      R1.all[[b]] <- (1 - (bI2x.all[[b]]+bI3x.all[[b]]+bI4x.all[[b]])/(1 - bI1x.all[[b]]))/(1 - (bI2o.all[[b]]+bI3o.all[[b]]+bI4o.all[[b]])/(1 - bI1o.all[[b]]))
-      R1.all[[b]][!is.finite(R1.all[[b]])] <- 99 #needed?
-      R2.all[[b]] <- (1 - (bI1x.all[[b]]+bI3x.all[[b]]+bI4x.all[[b]])/(1 - bI2x.all[[b]]))/(1 - (bI1o.all[[b]]+bI3o.all[[b]]+bI4o.all[[b]])/(1 - bI2o.all[[b]]))
-      R2.all[[b]][!is.finite(R2.all[[b]])] <- 99
-      if(e3){
-        R3.all[[b]] <- (1 - (bI2x.all[[b]]+bI1x.all[[b]]+bI4x.all[[b]])/(1 - bI3x.all[[b]]))/(1 - (bI2o.all[[b]]+bI1o.all[[b]]+bI4o.all[[b]])/(1 - bI3o.all[[b]]))
-        R3.all[[b]][!is.finite(R3.all[[b]])] <- 99
-      }
-      if(e4){
-        R4.all[[b]] <- (1 - (bI2x.all[[b]]+bI1x.all[[b]]+bI3x.all[[b]])/(1 - bI4x.all[[b]]))/(1 - (bI2o.all[[b]]+bI1o.all[[b]]+bI3o.all[[b]])/(1 - bI4o.all[[b]]))
-        R4.all[[b]][!is.finite(R4.all[[b]])] <- 99
-      }
+      R1.all[[b]] <- dat_boot$R1
+      R2.all[[b]] <- dat_boot$R2
+      if(e3) R3.all[[b]] <- dat_boot$R3
+      if(e4) R4.all[[b]] <- dat_boot$R4
       rm(dat_boot)
     }
     ttx <- sort(c(0, df$exit[df$event > 0]))
@@ -128,7 +106,7 @@ bootCRCumInc <- function (df, exit, event, exposure, entry = NULL, weights = NUL
     CRCumInc_boot <- as.data.frame(cbind(R1.lower, R1.upper, R2.lower, R2.upper))
     if(e3) CRCumInc_boot <- as.data.frame(cbind(CRCumInc_boot,R3.lower,R3.upper))
     if(e4) CRCumInc_boot <- as.data.frame(cbind(CRCumInc_boot,R4.lower,R4.upper))
-    if(print.attr) print(attributes(CRCumInc_boot))
+    if(print.attr) print(attributes(CRCumInc_boot)[1:2])
     invisible(CRCumInc_boot)
   }
 }
