@@ -9,7 +9,7 @@
 #' @param maxtime A number.
 #' @param ci A number.
 #' @param eoi A number.
-#' @importFrom "grDevices" "gray"
+#' @importFrom "grDevices" "gray" "recordPlot"
 #' @importFrom "graphics" "abline" "axis" "box" "lines" "mtext" "par" "plot" "text"
 #' @return Plot function
 #' @export
