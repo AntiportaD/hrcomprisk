@@ -4,11 +4,11 @@
 \name{hrcomprisk}
 \alias{hrcomprisk}
 \alias{hrcomprisk-package}
-\title{hrcomprisk: A non-Parametric Diagnostic Tool for Competing Risk hazard estimation}
+\title{hrcomprisk: A Nonparametric assessment of differences between competing risks hazard ratios}
 \description{
 The \code{hrcomprisk} package aims to estimate Nonparametric Cumulative-Incidence Based Estimation
 of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios from Ng, Antiporta,
-Matheson and Muñoz (2019) to compare sub-hazard ratio (a la Fine and Gray; sHR) and cause-specific hazard ratio
+Matheson and Muñoz (2019)[1] to compare sub-hazard ratio (a la Fine and Gray; sHR) and cause-specific hazard ratio
 (csHR) approaches.
 }
 \details{
@@ -37,20 +37,20 @@ If confidence intervals are not desired, the user can supply a column of weights
 
 \strong{3.	Use of the nonparametric sHR/csHR ratio for calculation of sHR estimates}
 
-Simultaneous estimation of all subhazard ratios and cause-specific hazard ratios is often fraught with problematic results due to incompatible modeling assumptions (e.g., not all ratios can be proportional) and the tethering inherent in subhazard analysis of multiple events as described by Muñoz et al. (book ref). Cause-specific hazard ratios are not subject to such tethering constraints, and will admissible regardless of whether the model is misspecified. As such, the output of this function – valid nonparametric estimates of the sHR/csHR ratio – can be combined with (i.e., multiplied by) cause-specific hazard ratio estimates (e.g., from a proportional or loglinear cause-specific hazards model) to produce subhazard ratio estimates which do not violate the principles of tethering. See below for an example of how to implement this.
+Simultaneous estimation of all subhazard ratios and cause-specific hazard ratios is often fraught with problematic results due to incompatible modeling assumptions (e.g., not all ratios can be proportional) and the tethering inherent in subhazard analysis of multiple events as described by Muñoz et al. [2]. Cause-specific hazard ratios are not subject to such tethering constraints, and will admissible regardless of whether the model is misspecified. As such, the output of this function – valid nonparametric estimates of the sHR/csHR ratio – can be combined with (i.e., multiplied by) cause-specific hazard ratio estimates (e.g., from a proportional or loglinear cause-specific hazards model) to produce subhazard ratio estimates which do not violate the principles of tethering.
 }
 \section{Functions}{
 
 
 The hrcomprisk package provides 3 main functions and a wrapper function:
 
+- \link{npcrest} : Main wrapper function.
+
 - \link{CRCumInc} : Estimation of Cumulative Incidence Functions (CIF) of competing events.
 
 - \link{plotCIF} : Plot Incidence and Ratio of sHR/csHR.
 
 - \link{bootCRCumInc} : Bootstrap for estimated CIF.
-
-- \link{npcrest} : Wrapper function.
 }
 
 \references{
@@ -60,15 +60,15 @@ chronic kidney disease progression. 2019 (in review)
 
 2. Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and Evaluation of Predictions.
 Lee MLT, Gail M, Pfeiffer R, Satten G, Cai T, Gandy A, editor. New York: Springer; 2013.
-Non-proportionality of hazards in the competing risks framework; pp. 3–22.
-\url[Google Scholar]{https://link.springer.com/chapter/10.1007/978-1-4614-8981-8_1}
+Non-proportionality of hazards in the competing risks framework; pp. 3–22. \href{https://link.springer.com/chapter/10.1007/978-1-4614-8981-8_1}{[Google Scholar]}
 }
 \seealso{
 Useful links:
+
 \url{https://gihub.com/AntiportaD/hrcomprisk}
 }
 \author{
-\strong{Mantainer:}  Daniel Antiporta \email{dantiporta@jhu.edu}
+\strong{Mantainer:}  Daniel Antiporta <\email{dantiporta@jhu.edu}>
 
 \strong{Authors:}
 

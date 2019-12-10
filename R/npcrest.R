@@ -1,6 +1,6 @@
 #' Nonparametric Cumulative-Incidence Based Estimation of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios
 #'
-#' @description A comprehensive wrapper function for implementing the competing risks diagnostic of Ng, Antiporta, Matheson and Muñoz (2019) to compare sub-hazard ratio (a la Fine and Gray; sHR) and cause-specific hazard ratio (csHR) approaches. While doing either analysis individually involves parametric or semi-parametric estimation, because of the fact that the derivatives of the cumulative incidences involved in the quantities cancel out when their ratio is considered, this ratio can be characterized completely using nonparametric estimates of the event-specific cumulative incidences. This provides a useful diagnostic when both analyses are performed as well as a method for estimating the sub-hazard ratios in a way that is valid and free of tethering assumptions characterized by Muñoz et al. (ref).
+#' @description A comprehensive wrapper function for implementing the competing risks diagnostic of Ng, Antiporta, Matheson and Muñoz (2019) to compare sub-hazard ratio (a la Fine and Gray; sHR) and cause-specific hazard ratio (csHR) approaches. While doing either analysis individually involves parametric or semi-parametric estimation, because of the fact that the derivatives of the cumulative incidences involved in the quantities cancel out when their ratio is considered, this ratio can be characterized completely using nonparametric estimates of the event-specific cumulative incidences. This provides a useful diagnostic when both analyses are performed as well as a method for estimating the sub-hazard ratios in a way that is valid and free of tethering assumptions characterized by Muñoz et al. (2013).
 #' @description This function calls datcheck, CRCumInc, bootCRCumInc (if confidence intervals are requested), and plotCIF, all of which are also included in the hrcomprisk package. These functions should generally not be utilized directly.
 #' @details \strong{1.	Bootstrapped confidence intervals for the sHR/csHR quantities}
 #' @details If a positive number of bootstrap replicates is requested via the rep argument, the program will calculate and provide pointwise percentile-based bootstrap confidence intervals for the sHR/csHR ratios. The bootstrapping process uses two loops. In the first loop, rep bootstrap samples are taken stratified by exposure (so each sample has the same exposure prevalence as the original data) and all event-specific cumulative incidences are calculated and stored for each of them. In the second loop, for each event time (i.e., each change in any one of the cumulative incidence functions), the 2.5th and 97.5th percentiles of the bootstrap estimates of the rep sHR/csHR ratios are stored as the lower and upper confidence limits. These are not directly returned to the user, but are used in the plotting of the sHR/csHR ratios.
@@ -18,18 +18,25 @@
 #' @param maxtime Largest time to display on the x-axis of all output plots. As data can become sparse and thus more widely variable at times get large, this argument may be used to restrict plots to a range of the data that is discerned to be more accurate and reliable.
 #' @param rep Number of replicates for bootstrapping if confidence intervals for the sHR/csHR estimate are desired. See more details on bootstrapping below.
 #' @param eoi Event number for the event of interest, useful when more than two events exist. If utilized, only two cumulative incidence curves will be plotted: one for the event of interest, and one for the composite of all competing events. Each event will still have its sHR/csHR ratio plotted.
-#' @param print.attr A logical value `TRUE/FALSE` if results needed to be returned in console.
+#' @param print.attr A logical value \code{TRUE/FALSE} if results needed to be returned in console.
 #' @importFrom "grDevices"  "gray"
 #' @importFrom "graphics" "abline" "axis" "box" "lines" "mtext" "par" "plot" "text"
 #' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"
-#' @return An object containing the plotted figures ($plots) and a data frame ($cuminc) with the following columns:
-#' @return `event`		Type of event that occurs at the given time.
-#' @return `exposure`	Exposure group in which the event happens.
-#' @return `time`		Time of the event.
-#' @return `CIoinc_comp`	Value of the unexposed (denoted by “o”) composite cumulative incidence at the given time.
-#' @return `CIxinc_comp`	Value of the exposed (denoted by “x”) composite cumulative incidence at the given time.
-#' @return `CIoinc_1`	Value of the unexposed cumulative incidence of event 1 at the given time.
-#' @return `CIxinc_1`	Value of the exposed cumulative incidence of event 1 at the given time.
+#' @return An object containing the plotted figures (\code{$plots}) and a data frame (\code{$cuminc}) with the following columns:
+#' @return \code{event}    Type of event that occurs at the given time.
+#' @return \code{exposure}    Exposure group in which the event happens.
+#' @return \code{time}     Time of the event.
+#' @return \code{CIoinc_comp}    Value of the unexposed (denoted by “o”) composite cumulative incidence at the given time.
+#' @return \code{CIxinc_comp}    Value of the exposed (denoted by “x”) composite cumulative incidence at the given time.
+#' @return \code{CIoinc_1}      Value of the unexposed cumulative incidence of event 1 at the given time.
+#' @return \code{CIxinc_1}    Value of the exposed cumulative incidence of event 1 at the given time.
+#' @return \code{R_1}     Sub-hazard ratio/Cause-specific hazard ratio for event 1.
+#' @return \code{R_2}     Sub-hazard ratio/Cause-specific hazard ratio for event 2.
+#' @references
+#'
+#' Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and Evaluation of Predictions.
+#' Lee MLT, Gail M, Pfeiffer R, Satten G, Cai T, Gandy A, editor. New York: Springer; 2013.
+#' Non-proportionality of hazards in the competing risks framework; pp. 3–22. \href{https://link.springer.com/chapter/10.1007/978-1-4614-8981-8_1}{[Google Scholar]}
 #'
 #' @export
 npcrest <- function (df, exit, event, exposure, entry = NULL, weights = NULL, ipwvars=NULL, maxtime = Inf, rep = NULL, eoi = -1, print.attr=T)

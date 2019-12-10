@@ -1,8 +1,8 @@
-#' hrcomprisk: A non-Parametric Diagnostic Tool for Competing Risk hazard estimation
+#' hrcomprisk: A Nonparametric assessment of differences between competing risks hazard ratios
 #'
 #' The \code{hrcomprisk} package aims to estimate Nonparametric Cumulative-Incidence Based Estimation
 #' of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios from Ng, Antiporta,
-#' Matheson and Muñoz (2019) to compare sub-hazard ratio (a la Fine and Gray; sHR) and cause-specific hazard ratio
+#' Matheson and Muñoz (2019)[1] to compare sub-hazard ratio (a la Fine and Gray; sHR) and cause-specific hazard ratio
 #' (csHR) approaches.
 #'
 #' While doing either analysis individually involves parametric or semi-parametric estimation,
@@ -25,19 +25,19 @@
 #' @details If confidence intervals are not desired, the user can supply a column of weights (e.g, inverse probability weights from a model predicting exposure) which will be used in the estimation of the cumulative incidences and the sHR/csHR ratios derived from them. However, the use of bootstrapping for calculation of confidence intervals as described above necessitates that such a model be refit for each bootstrap sample, generating new weights for new estimates of all quantities. If this is desired, the user should include all the predictor variables as columns in the data frame so that the appropriate model can be fit automatically using the ipwvars argument. If this method is used, the program uses a logistic regression model to calculate probability of exposure, stabilizes the resulting weights to the sample size, and winsorizes weights that fall outside ±4 standard deviations on the log scale. Using this method can increase computation time as the model must be refit on each bootstrap replicate.
 #'
 #' @details \strong{3.	Use of the nonparametric sHR/csHR ratio for calculation of sHR estimates}
-#' @details Simultaneous estimation of all subhazard ratios and cause-specific hazard ratios is often fraught with problematic results due to incompatible modeling assumptions (e.g., not all ratios can be proportional) and the tethering inherent in subhazard analysis of multiple events as described by Muñoz et al. (book ref). Cause-specific hazard ratios are not subject to such tethering constraints, and will admissible regardless of whether the model is misspecified. As such, the output of this function – valid nonparametric estimates of the sHR/csHR ratio – can be combined with (i.e., multiplied by) cause-specific hazard ratio estimates (e.g., from a proportional or loglinear cause-specific hazards model) to produce subhazard ratio estimates which do not violate the principles of tethering. See below for an example of how to implement this.
+#' @details Simultaneous estimation of all subhazard ratios and cause-specific hazard ratios is often fraught with problematic results due to incompatible modeling assumptions (e.g., not all ratios can be proportional) and the tethering inherent in subhazard analysis of multiple events as described by Muñoz et al. [2]. Cause-specific hazard ratios are not subject to such tethering constraints, and will admissible regardless of whether the model is misspecified. As such, the output of this function – valid nonparametric estimates of the sHR/csHR ratio – can be combined with (i.e., multiplied by) cause-specific hazard ratio estimates (e.g., from a proportional or loglinear cause-specific hazards model) to produce subhazard ratio estimates which do not violate the principles of tethering.
 #'
 #' @section Functions:
 #'
 #' The hrcomprisk package provides 3 main functions and a wrapper function:
+#'
+#' - \link{npcrest} : Main wrapper function.
 #'
 #' - \link{CRCumInc} : Estimation of Cumulative Incidence Functions (CIF) of competing events.
 #'
 #' - \link{plotCIF} : Plot Incidence and Ratio of sHR/csHR.
 #'
 #' - \link{bootCRCumInc} : Bootstrap for estimated CIF.
-#'
-#' - \link{npcrest} : Wrapper function.
 #'
 #' @docType package
 #'
@@ -48,11 +48,11 @@
 #'
 #' 2. Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and Evaluation of Predictions.
 #' Lee MLT, Gail M, Pfeiffer R, Satten G, Cai T, Gandy A, editor. New York: Springer; 2013.
-#' Non-proportionality of hazards in the competing risks framework; pp. 3–22. \href{https://link.springer.com/chapter/10.1007/978-1-4614-8981-8_1}{Google}
+#' Non-proportionality of hazards in the competing risks framework; pp. 3–22. \href{https://link.springer.com/chapter/10.1007/978-1-4614-8981-8_1}{[Google Scholar]}
 #'
 #' @author
 #'
-#' \strong{Mantainer:}  Daniel Antiporta \email{dantiporta@@jhu.edu}
+#' \strong{Mantainer:}  Daniel Antiporta <\email{dantiporta@@jhu.edu}>
 #'
 #' \strong{Authors:}
 #'
