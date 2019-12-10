@@ -22,7 +22,14 @@
 #' @importFrom "grDevices"  "gray"
 #' @importFrom "graphics" "abline" "axis" "box" "lines" "mtext" "par" "plot" "text"
 #' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"
-#' @return npcrest
+#' @return An object containing the plotted figures ($plots) and a data frame ($cuminc) with the following columns:
+#' @return `event`		Type of event that occurs at the given time.
+#' @return `exposure`	Exposure group in which the event happens.
+#' @return `time`		Time of the event.
+#' @return `CIoinc_comp`	Value of the unexposed (denoted by “o”) composite cumulative incidence at the given time.
+#' @return `CIxinc_comp`	Value of the exposed (denoted by “x”) composite cumulative incidence at the given time.
+#' @return `CIoinc_1`	Value of the unexposed cumulative incidence of event 1 at the given time.
+#' @return `CIxinc_1`	Value of the exposed cumulative incidence of event 1 at the given time.
 #'
 #' @export
 npcrest <- function (df, exit, event, exposure, entry = NULL, weights = NULL, ipwvars=NULL, maxtime = Inf, rep = NULL, eoi = -1, print.attr=T)
