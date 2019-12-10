@@ -32,7 +32,21 @@ npcrest(df, exit, event, exposure, entry = NULL, weights = NULL,
 \item{print.attr}{A logical value `TRUE/FALSE` if results needed to be returned in console.}
 }
 \value{
-npcrest
+An object containing the plotted figures ($plots) and a data frame ($cuminc) with the following columns:
+
+`event`		Type of event that occurs at the given time.
+
+`exposure`	Exposure group in which the event happens.
+
+`time`		Time of the event.
+
+`CIoinc_comp`	Value of the unexposed (denoted by “o”) composite cumulative incidence at the given time.
+
+`CIxinc_comp`	Value of the exposed (denoted by “x”) composite cumulative incidence at the given time.
+
+`CIoinc_1`	Value of the unexposed cumulative incidence of event 1 at the given time.
+
+`CIxinc_1`	Value of the exposed cumulative incidence of event 1 at the given time.
 }
 \description{
 A comprehensive wrapper function for implementing the competing risks diagnostic of Ng, Antiporta, Matheson and Muñoz (2019) to compare sub-hazard ratio (a la Fine and Gray; sHR) and cause-specific hazard ratio (csHR) approaches. While doing either analysis individually involves parametric or semi-parametric estimation, because of the fact that the derivatives of the cumulative incidences involved in the quantities cancel out when their ratio is considered, this ratio can be characterized completely using nonparametric estimates of the event-specific cumulative incidences. This provides a useful diagnostic when both analyses are performed as well as a method for estimating the sub-hazard ratios in a way that is valid and free of tethering assumptions characterized by Muñoz et al. (ref).

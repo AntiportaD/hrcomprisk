@@ -3,7 +3,9 @@
 #' The \code{hrcomprisk} package aims to estimate Nonparametric Cumulative-Incidence Based Estimation
 #' of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios from Ng, Antiporta,
 #' Matheson and Muñoz (2019) to compare sub-hazard ratio (a la Fine and Gray; sHR) and cause-specific hazard ratio
-#' (csHR) approaches. While doing either analysis individually involves parametric or semi-parametric estimation,
+#' (csHR) approaches.
+#'
+#' While doing either analysis individually involves parametric or semi-parametric estimation,
 #' because of the fact that the derivatives of the cumulative incidences involved in the quantities cancel out when
 #' their ratio is considered, this ratio can be characterized completely using nonparametric estimates of the event-specific
 #' cumulative incidences. This provides a useful diagnostic when both analyses are performed as well as a method for estimating
@@ -29,7 +31,7 @@
 #'
 #' The hrcomprisk package provides 3 main functions and a wrapper function:
 #'
-#' - \link{CRCuminc} : Estimation of Cumulative Incidence Functions (CIF) of competing events.
+#' - \link{CRCumInc} : Estimation of Cumulative Incidence Functions (CIF) of competing events.
 #'
 #' - \link{plotCIF} : Plot Incidence and Ratio of sHR/csHR.
 #'
@@ -40,13 +42,17 @@
 #' @docType package
 #'
 #' @references
-#' 1. Ng D, Antiporta DA, Matheson M, Munoz A. Nonparametric assessment of differences between competing risks hazard ratios: application to racial differences in pediatric chronic kidney disease progression. 2019 (in review)
+#' 1. Ng D, Antiporta DA, Matheson M, Munoz A. Nonparametric assessment of differences
+#' between competing risks hazard ratios: application to racial differences in pediatric
+#' chronic kidney disease progression. 2019 (in review)
 #'
-#' 2. Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and Evaluation of Predictions. Lee MLT, Gail M, Pfeiffer R, Satten G, Cai T, Gandy A, editor. New York: Springer; 2013. Non-proportionality of hazards in the competing risks framework; pp. 3–22. [Google Scholar](https://link.springer.com/chapter/10.1007/978-1-4614-8981-8_1)
+#' 2. Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and Evaluation of Predictions.
+#' Lee MLT, Gail M, Pfeiffer R, Satten G, Cai T, Gandy A, editor. New York: Springer; 2013.
+#' Non-proportionality of hazards in the competing risks framework; pp. 3–22. \href{https://link.springer.com/chapter/10.1007/978-1-4614-8981-8_1}{Google}
 #'
 #' @author
 #'
-#' \strong{Mantainer:}  Daniel Antiporta \email{<dantiporta@@jhu.edu>}
+#' \strong{Mantainer:}  Daniel Antiporta \email{dantiporta@@jhu.edu}
 #'
 #' \strong{Authors:}
 #'
@@ -59,8 +65,10 @@
 #' - Alvaro Muñoz
 #'
 #' @seealso
+#'
 #' Useful links:
-#' \link{https://gihub.com/AntiportaD/hrcomprisk}
+#'
+#' \url{https://gihub.com/AntiportaD/hrcomprisk}
 #'
 #' @name hrcomprisk
 NULL
