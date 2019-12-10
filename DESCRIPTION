@@ -6,7 +6,7 @@ Author: Daniel Antiporta <dantiporta@jhu.edu>;
         Matthew Matheson <mmathes4@jhu.edu>;
         Derek Ng <dng@jhu.edu>;
         Alvaro Munoz <amunoz@jhu.edu>
-Maintainer: Daniel Antiporta <dantiporta@jhu.edu>; Matthew Matheson <mmathes4@jhu.edu>
+Maintainer: Daniel Antiporta <dantiporta@jhu.edu>
 Description: The hrcomprisk package provides a Nonparametric Cumulative-Incidence Based Estimation of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios.
 Depends: R (>= 3.0.0)
 Imports: survival
