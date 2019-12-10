@@ -2,11 +2,11 @@
 #'
 #' The hrcomprisk package provides a non-Parametric Diagnostic Tool for Competing Risk hazard estimation.
 #'
-#' @section `hrcomprisk` functions:
+#' @section \code{hrcomprisk} functions:
 #'
 #' The hrcomprisk package provides 3 main functions and a wrapper function:
 #'
-#' - \link{CRCuminc.Rd} : Estimation of Cumulative Incidence Functions (CIF) of competing events
+#' - \link{CRCuminc} : Estimation of Cumulative Incidence Functions (CIF) of competing events
 #'
 #' - \link{plotCIF} : Plot Incidence and Ratio of sHR/csHR
 #'
