@@ -7,9 +7,9 @@
 
 <!-- badges: end -->
 
-The goal of hrcomprisk is to estimate Nonparametric Cumulative-Incidence
-Based Estimation of the Ratios of Sub-Hazard Ratios to Cause-Specific
-Hazard Ratios
+The `hrcomprisk` package aims to estimate Nonparametric
+Cumulative-Incidence Based Estimation of the Ratios of Sub-Hazard Ratios
+to Cause-Specific Hazard Ratios
 
 ## Installation
 
@@ -172,3 +172,16 @@ npcrest(df=data, exit=exit, event=event, exposure=b1nb0,  rep=100, eoi=1)
 ```
 
 <img src="man/figures/README-npcrest-1.png" width="100%" /><img src="man/figures/README-npcrest-2.png" width="100%" />
+
+## References
+
+1.  Ng D, Antiporta DA, Matheson MM, Munoz A. Nonparametric assessment
+    of differences between competing risks hazard ratios: application to
+    racial differences in pediatric chronic kidney disease progression.
+    2019 (in review)
+2.  Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and
+    Evaluation of Predictions. Lee MLT, Gail M, Pfeiffer R, Satten G,
+    Cai T, Gandy A, editor. New York: Springer; 2013.
+    Non-proportionality of hazards in the competing risks framework;
+    pp. 3–22. [Google
+    Scholar](https://link.springer.com/chapter/10.1007/978-1-4614-8981-8_1)
