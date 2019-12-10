@@ -52,19 +52,6 @@ mydat.CIF<-CRCumInc(df=data, time=exit, event=event, exposed=b1nb0, print.attr=T
 #> 
 #> $class
 #> [1] "data.frame"
-#> 
-#> $row.names
-#>   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
-#>  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
-#>  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
-#>  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
-#>  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
-#>  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101 102
-#> [103] 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119
-#> [120] 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136
-#> [137] 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
-#> [154] 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170
-#> [171] 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187
 ```
 
 ## Using a the output to create Plots of CIFs and the Ratio of Hazard Ratios (Rk)
@@ -84,6 +71,10 @@ plotCIF(cifobj=mydat.CIF, maxtime = 20, eoi = 1)
 ```
 
 <img src="man/figures/README-plotCIF-1.png" width="100%" /><img src="man/figures/README-plotCIF-2.png" width="100%" />
+
+    #> $plot1
+    #> 
+    #> $plot2
 
 ## Bootstrapping the data to get 95% Confidence Intervals for the Ratio of Hazard Ratios (Rk)
 
@@ -123,6 +114,10 @@ plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF)
 
 <img src="man/figures/README-plot_ci-1.png" width="100%" /><img src="man/figures/README-plot_ci-2.png" width="100%" />
 
+    #> $plot1
+    #> 
+    #> $plot2
+
 ## The wrapper function `npcrest`
 
 The package also offers a wrapper function (`npcrest`) to do all this
@@ -137,19 +132,6 @@ npcrest(df=data, exit=exit, event=event, exposure=b1nb0,rep=100, maxtime = 20)
 #> 
 #> $class
 #> [1] "data.frame"
-#> 
-#> $row.names
-#>   [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
-#>  [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
-#>  [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
-#>  [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
-#>  [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
-#>  [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100 101 102
-#> [103] 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119
-#> [120] 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136
-#> [137] 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
-#> [154] 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170
-#> [171] 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187
 #> 
 #> $names
 #> [1] "R1.lower" "R1.upper" "R2.lower" "R2.upper"

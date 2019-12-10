@@ -31,13 +31,16 @@ npcrest <- function (df, exit, event, exposure, entry = NULL, weights = NULL, ip
   evt <- df[[deparse(substitute(event))]]
   if(is.factor(evt) & eoi>0) eoi <- (as.numeric(evt[evt == eoi])-1)[1]
   myCIF <- do.call(CRCumInc,list(df,substitute(exit), substitute(event), substitute(exposure), substitute(entry), substitute(weights), substitute(ipwvars)))
-
   if (!is.null(rep)) {
     boot_myCIF <- do.call(bootCRCumInc,list(df, substitute(exit), substitute(event), substitute(exposure), substitute(entry), substitute(weights), substitute(ipwvars), rep))
-    plotCIF(myCIF, maxtime = maxtime, ci = boot_myCIF, eoi = eoi)
+    myplots<-plotCIF(myCIF, maxtime = maxtime, ci = boot_myCIF, eoi = eoi)
   }
   if (is.null(rep)) {
-    plotCIF(myCIF, maxtime = maxtime, ci = NULL, eoi = eoi)
+    myplots<-plotCIF(myCIF, maxtime = maxtime, ci = NULL, eoi = eoi)
   }
-  invisible(myCIF)
+  myresults <- list(myCIF=NA, plot1 = NA, plot2 = NA)
+  myresults$myCIF <- myCIF
+  myresults$plot1 <- myplots$plot1
+  myresults$plot2 <- myplots$plot2
+  invisible(myresults)
 }

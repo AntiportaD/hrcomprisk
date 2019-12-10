@@ -126,6 +126,6 @@ CRCumInc <- function(df,time,event,exposed,entry=NULL,weights=NULL,ipwvars=NULL,
     names(myCIF)[l]<-paste0("CIxinc_", i) #name follows Cumulative Incidence among the EXPOSED for EVENT 'i'
     names(myCIF)[j]<-paste0("CIoinc_", i) #name follows Cumulative Incidence among the UNEXPOSED for EVENT 'i'
   }
-  if(print.attr) print(attributes(myCIF))
-  invisible(myCIF)
+  if(print.attr) print(attributes(myCIF)[1:2])
+  return(myCIF)
 }

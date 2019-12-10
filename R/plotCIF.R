@@ -16,7 +16,7 @@
 
 plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
 {
-  myplots <- list()
+  myplots <- list(plot1 = NA, plot2 = NA)
   time <- cifobj$time[cifobj$time <= maxtime]
   I1o <- cifobj$CIoinc_1[cifobj$time <= maxtime]
   I1x <- cifobj$CIxinc_1[cifobj$time <= maxtime]
@@ -96,7 +96,7 @@ plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
     lines(stepfun(time, max(I1x+I2x)+c(0, I3x)), cex = 0, lwd = 3, col = gray(0.2))
     lines(stepfun(time, max(I1x+I2x+I3x)+c(0, I4x)), cex = 0, lwd = 3, col = gray(0))
   } #endif4
-  myplots[[1]] <- recordPlot()
+  myplots$plot1 <- recordPlot()
 
   #ttx <- sort(data$time)
   #ttx <- ttx[ttx < maxtime]
@@ -156,6 +156,6 @@ plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
     #text(xmid, quantile(yrange,0.95), "Event 4", cex = 1.2, col = gray(0))
     mtext("Event 4",at=xmid,side=3,line=1,cex=1.2)
   } #endif4
-  myplots[[2]] <- recordPlot()
-  invisible(myplots)
+  myplots$plot2<- recordPlot()
+  return(myplots)
 }
