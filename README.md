@@ -9,7 +9,7 @@
 
 The `hrcomprisk` package aims to estimate Nonparametric
 Cumulative-Incidence Based Estimation of the Ratios of Sub-Hazard Ratios
-to Cause-Specific Hazard Ratios
+to Cause-Specific Hazard Ratios.
 
 ## Installation
 
@@ -118,7 +118,7 @@ the previous plot using again the `plotCIF`
 function.
 
 ``` r
-plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF, eoi=1)
+plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF)
 ```
 
 <img src="man/figures/README-plot_ci-1.png" width="100%" /><img src="man/figures/README-plot_ci-2.png" width="100%" />
@@ -130,7 +130,7 @@ analyses in one
 step.
 
 ``` r
-npcrest(df=data, exit=exit, event=event, exposure=b1nb0,  rep=100, eoi=1)
+npcrest(df=data, exit=exit, event=event, exposure=b1nb0,rep=100, maxtime = 20)
 #> $names
 #> [1] "event"       "exposure"    "time"        "CIoinc_comp" "CIxinc_comp"
 #> [6] "CIoinc_1"    "CIxinc_1"    "CIoinc_2"    "CIxinc_2"   
@@ -175,8 +175,8 @@ npcrest(df=data, exit=exit, event=event, exposure=b1nb0,  rep=100, eoi=1)
 
 ## References
 
-1.  Ng D, Antiporta DA, Matheson MM, Munoz A. Nonparametric assessment
-    of differences between competing risks hazard ratios: application to
+1.  Ng D, Antiporta DA, Matheson M, Munoz A. Nonparametric assessment of
+    differences between competing risks hazard ratios: application to
     racial differences in pediatric chronic kidney disease progression.
     2019 (in review)
 2.  Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and

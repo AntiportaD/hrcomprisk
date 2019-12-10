@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The `hrcomprisk` package aims to estimate Nonparametric Cumulative-Incidence Based Estimation of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios
+The `hrcomprisk` package aims to estimate Nonparametric Cumulative-Incidence Based Estimation of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios.
 
 ## Installation
 
@@ -71,7 +71,7 @@ ciCIF<-bootCRCumInc(df=data, exit=exit, event=event, exposure=b1nb0, rep=100, pr
 Finally, we can use this new data to add the 95% Confidence Intervals to the previous plot using again the `plotCIF` function.
 
 ```{r plot_ci}
-plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF, eoi=1)
+plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF)
 ```
 
 ## The wrapper function `npcrest` 
@@ -79,10 +79,10 @@ plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF, eoi=1)
 The package also offers a wrapper function (`npcrest`) to do all this analyses in one step.
 
 ```{r npcrest}
-npcrest(df=data, exit=exit, event=event, exposure=b1nb0,  rep=100, eoi=1)
+npcrest(df=data, exit=exit, event=event, exposure=b1nb0,rep=100, maxtime = 20)
 ```
 
 ## References
 
-1. Ng D, Antiporta DA, Matheson MM, Munoz A. Nonparametric assessment of differences between competing risks hazard ratios: application to racial differences in pediatric chronic kidney disease progression. 2019 (in review)
+1. Ng D, Antiporta DA, Matheson M, Munoz A. Nonparametric assessment of differences between competing risks hazard ratios: application to racial differences in pediatric chronic kidney disease progression. 2019 (in review)
 2. Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and Evaluation of Predictions. Lee MLT, Gail M, Pfeiffer R, Satten G, Cai T, Gandy A, editor. New York: Springer; 2013. Non-proportionality of hazards in the competing risks framework; pp. 3–22. [Google Scholar](https://link.springer.com/chapter/10.1007/978-1-4614-8981-8_1)
