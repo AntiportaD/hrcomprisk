@@ -1,6 +1,6 @@
 Package: hrcomprisk
 Type: Package
-Title: Nonparametric Cumulative-Incidence Based Estimation of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios
+Title: Nonparametric assessment of differences between competing risks hazard
 Version: 0.1.0
 Author: Daniel Antiporta <dantiporta@jhu.edu>; 
         Matthew Matheson <mmathes4@jhu.edu>;

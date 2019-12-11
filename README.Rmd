@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# hrcomprisk
+# hrcomprisk: Nonparametric assessment of differences between competing risks hazard
 
 <!-- badges: start -->
 <!-- badges: end -->

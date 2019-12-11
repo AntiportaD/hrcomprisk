@@ -1,6 +1,6 @@
-#' hrcomprisk: A Nonparametric assessment of differences between competing risks hazard ratios
+#' hrcomprisk: Nonparametric assessment of differences between competing risks hazard
 #'
-#' The \code{hrcomprisk} package aims to estimate Nonparametric Cumulative-Incidence Based Estimation
+#' \code{hrcomprisk} aims to estimate Nonparametric Cumulative-Incidence Based Estimation
 #' of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios from Ng, Antiporta,
 #' Matheson and Muñoz (2019)[1] to compare sub-hazard ratio (a la Fine and Gray; sHR) and cause-specific hazard ratio
 #' (csHR) approaches.
@@ -39,8 +39,6 @@
 #'
 #' - \link{bootCRCumInc} : Bootstrap for estimated CIF.
 #'
-#' @docType package
-#'
 #' @references
 #' 1. Ng D, Antiporta DA, Matheson M, Munoz A. Nonparametric assessment of differences
 #' between competing risks hazard ratios: application to racial differences in pediatric
@@ -68,7 +66,8 @@
 #'
 #' Useful links:
 #'
-#' \url{https://gihub.com/AntiportaD/hrcomprisk}
+#' \url{https://github.com/AntiportaD/hrcomprisk}
 #'
+#' @docType package
 #' @name hrcomprisk
 NULL
