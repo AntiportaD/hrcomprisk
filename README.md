@@ -7,9 +7,9 @@
 
 <!-- badges: end -->
 
-The `hrcomprisk` package aims to estimate Nonparametric
-Cumulative-Incidence Based Estimation of the Ratios of Sub-Hazard Ratios
-to Cause-Specific Hazard Ratios.
+This package aims to estimate Nonparametric Cumulative-Incidence Based
+Estimation of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard
+Ratios.
 
 ## Installation
 
