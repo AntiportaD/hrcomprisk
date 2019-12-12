@@ -1,4 +1,4 @@
-#' hrcomprisk: Nonparametric assessment of differences between competing risks hazard
+#' hrcomprisk: Nonparametric Assessment of Differences between Competing Risks Hazards
 #'
 #' \code{hrcomprisk} aims to estimate Nonparametric Cumulative-Incidence Based Estimation
 #' of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios from Ng, Antiporta,

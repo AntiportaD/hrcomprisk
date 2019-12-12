@@ -4,7 +4,7 @@
 \name{hrcomprisk}
 \alias{hrcomprisk}
 \alias{hrcomprisk-package}
-\title{hrcomprisk: Nonparametric assessment of differences between competing risks hazard}
+\title{hrcomprisk: Nonparametric Assessment of Differences between Competing Risks Hazards}
 \description{
 \code{hrcomprisk} aims to estimate Nonparametric Cumulative-Incidence Based Estimation
 of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios from Ng, Antiporta,
