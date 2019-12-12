@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# hrcomprisk: Nonparametric assessment of differences between competing risks hazard
+# hrcomprisk: Nonparametric Assessment of Differences Between Competing Risks Hazards
 
 <!-- badges: start -->
 
