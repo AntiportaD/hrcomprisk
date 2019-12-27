@@ -68,7 +68,7 @@ event.
 <!-- end list -->
 
 ``` r
-plotCIF(cifobj=mydat.CIF, maxtime = 20, eoi = 1)
+plots<-plotCIF(cifobj=mydat.CIF, maxtime = 20, eoi = 1)
 ```
 
 <img src="man/figures/README-plotCIF-1.png" width="100%" /><img src="man/figures/README-plotCIF-2.png" width="100%" />
@@ -128,7 +128,7 @@ npcrest(df=data, exit=exit, event=event, exposure=b1nb0,rep=100, maxtime=20, pri
 1.  Ng D, Antiporta DA, Matheson M, Munoz A. Nonparametric assessment of
     differences between competing risks hazard ratios: application to
     racial differences in pediatric chronic kidney disease progression.
-    2019 (in review)
+    Clinical Epidemiology, 2020 (in press)
 2.  Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and
     Evaluation of Predictions. Lee MLT, Gail M, Pfeiffer R, Satten G,
     Cai T, Gandy A, editor. New York: Springer; 2013.

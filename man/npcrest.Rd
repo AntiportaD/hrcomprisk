@@ -2,7 +2,7 @@
 % Please edit documentation in R/npcrest.R
 \name{npcrest}
 \alias{npcrest}
-\title{Nonparametric Cumulative-Incidence Based Estimation of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios}
+\title{Nonparametric Estimation of the Ratios of Hazard Ratios}
 \usage{
 npcrest(df, exit, event, exposure, entry = NULL, weights = NULL,
   ipwvars = NULL, maxtime = Inf, rep = NULL, eoi = -1,
@@ -68,10 +68,10 @@ If confidence intervals are not desired, the user can supply a column of weights
 
 \strong{3.	Use of the nonparametric sHR/csHR ratio for calculation of sHR estimates}
 
-Simultaneous estimation of all subhazard ratios and cause-specific hazard ratios is often fraught with problematic results due to incompatible modeling assumptions (e.g., not all ratios can be proportional) and the tethering inherent in subhazard analysis of multiple events as described by Muñoz et al. (book ref). Cause-specific hazard ratios are not subject to such tethering constraints, and will admissible regardless of whether the model is misspecified. As such, the output of this function – valid nonparametric estimates of the sHR/csHR ratio – can be combined with (i.e., multiplied by) cause-specific hazard ratio estimates (e.g., from a proportional or loglinear cause-specific hazards model) to produce subhazard ratio estimates which do not violate the principles of tethering. See below for an example of how to implement this.
+Simultaneous estimation of all subhazard ratios and cause-specific hazard ratios is often fraught with problematic results due to incompatible modeling assumptions (e.g., not all ratios can be proportional) and the tethering inherent in subhazard analysis of multiple events as described by Muñoz et al. (2013). Cause-specific hazard ratios are not subject to such tethering constraints, and will admissible regardless of whether the model is misspecified. As such, the output of this function – valid nonparametric estimates of the sHR/csHR ratio – can be combined with (i.e., multiplied by) cause-specific hazard ratio estimates (e.g., from a proportional or loglinear cause-specific hazards model) to produce subhazard ratio estimates which do not violate the principles of tethering. See below for an example of how to implement this.
 }
 \references{
-Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and Evaluation of Predictions.
-Lee MLT, Gail M, Pfeiffer R, Satten G, Cai T, Gandy A, editor. New York: Springer; 2013.
-Non-proportionality of hazards in the competing risks framework; pp. 3–22. \href{https://link.springer.com/chapter/10.1007/978-1-4614-8981-8_1}{[Google Scholar]}
+1. Ng D, Antiporta DA, Matheson M, Munoz A. Nonparametric assessment of differences between competing risks hazard ratios: application to racial differences in pediatric chronic kidney disease progression. (Clinical Epidemiology, 2019-in print)
+
+2. Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and Evaluation of Predictions. Lee MLT, Gail M, Pfeiffer R, Satten G, Cai T, Gandy A, editor. New York: Springer; 2013. Non-proportionality of hazards in the competing risks framework; pp. 3–22. [Google Scholar](https://link.springer.com/chapter/10.1007/978-1-4614-8981-8_1)
 }

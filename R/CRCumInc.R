@@ -1,9 +1,7 @@
-#' Estimation of Cumulative Incidence (CIF) of competing events
+#' Estimation of Cumulative Incidence of competing events
 #'
-#' This function is based on the CIF estimated by the survival package
-#' Returns an object type dataframe with the following variables and order:
-#' col1		col2		col3	col4		col5	...
-#' event	exposure	time	CI0inc_i	CI1inc_i ...
+#' @description Estimation of Cumulative Incidence Functions (CIF) of competing events.
+#' @description This function is based on the CIF estimated by the survival package.
 #' @param df A data frame containing, at a minimum, exit, event, and exposure.
 #' @param time Name of the column in df containing times of event or censoring.
 #' @param event Name of the column in df containing codes for censoring (0) and event types (1-4). Analysis of more than 4 competing events is not supported by this function.
@@ -14,7 +12,16 @@
 #' @param print.attr A logical value `TRUE/FALSE` if results needed to be returned in console.
 #' @importFrom "stats" "approx" "as.formula" "glm" "predict" "quantile" "sd" "stepfun"
 #' @importFrom "survival" "survfit" "Surv"
-#' @return Estimating CIF per event and exposure level
+#' @return A data frame with the following columns:
+#' @return \code{event}    Type of event that occurs at the given time.
+#' @return \code{exposure}    Exposure group in which the event happens.
+#' @return \code{time}     Time of the event.
+#' @return \code{CIoinc_comp}    Value of the unexposed (denoted by “o”) composite cumulative incidence at the given time.
+#' @return \code{CIxinc_comp}    Value of the exposed (denoted by “x”) composite cumulative incidence at the given time.
+#' @return \code{CIoinc_1}      Value of the unexposed cumulative incidence of event 1 at the given time.
+#' @return \code{CIxinc_1}    Value of the exposed cumulative incidence of event 1 at the given time.
+#' @return \code{R_1}     Sub-hazard ratio/Cause-specific hazard ratio for event 1.
+#' @return \code{R_2}     Sub-hazard ratio/Cause-specific hazard ratio for event 2.
 #' @export
 
 CRCumInc <- function(df,time,event,exposed,entry=NULL,weights=NULL,ipwvars=NULL,print.attr=T){

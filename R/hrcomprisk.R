@@ -1,7 +1,7 @@
-#' hrcomprisk: Nonparametric Assessment of Differences between Competing Risks Hazards
+#' Nonparametric Assessment Between Competing Risks Hazards
 #'
-#' \code{hrcomprisk} aims to estimate Nonparametric Cumulative-Incidence Based Estimation
-#' of the Ratios of Sub-Hazard Ratios to Cause-Specific Hazard Ratios from Ng, Antiporta,
+#' Estimate nonparametric cumulative-incidence based estimation
+#' of the ratios of sub-hazard ratios to cause-specific hazard ratios from Ng, Antiporta,
 #' Matheson and Muñoz (2019)[1] to compare sub-hazard ratio (a la Fine and Gray; sHR) and cause-specific hazard ratio
 #' (csHR) approaches.
 #'
@@ -35,14 +35,14 @@
 #'
 #' - \link{CRCumInc} : Estimation of Cumulative Incidence Functions (CIF) of competing events.
 #'
-#' - \link{plotCIF} : Plot Incidence and Ratio of sHR/csHR.
+#' - \link{plotCIF} : Plot Cumulative Incidence and Ratio of sHR/csHR.
 #'
-#' - \link{bootCRCumInc} : Bootstrap for estimated CIF.
+#' - \link{bootCRCumInc} : Bootstrap 95% Confidence Intervals limits for estimated Ratios of sHR/csHR.
 #'
 #' @references
 #' 1. Ng D, Antiporta DA, Matheson M, Munoz A. Nonparametric assessment of differences
 #' between competing risks hazard ratios: application to racial differences in pediatric
-#' chronic kidney disease progression. 2019 (in review)
+#' chronic kidney disease progression. Clinical Epidemiology, 2020 (in press)
 #'
 #' 2. Muñoz A, Abraham AG, Matheson M, Wada N. In: Risk Assessment and Evaluation of Predictions.
 #' Lee MLT, Gail M, Pfeiffer R, Satten G, Cai T, Gandy A, editor. New York: Springer; 2013.
@@ -67,6 +67,21 @@
 #' Useful links:
 #'
 #' \url{https://github.com/AntiportaD/hrcomprisk}
+#'
+#'@examples
+#'
+#' #data from the package
+#' data <- hrcomprisk::dat_ckid
+#' #Estimate the Cumulative Incidence Functions and Ratios of sHR and csHR
+#' mydat.CIF<-CRCumInc(df=data, time=exit, event=event, exposed=b1nb0, print.attr=TRUE)
+#' #Plot the CIs and Ratios estimated
+#' plots<-plotCIF(cifobj=mydat.CIF, maxtime = 20, eoi = 1)
+#' #Obtain the 95%CI by bootstraping
+#' ciCIF<-bootCRCumInc(df=data, exit=exit, event=event, exposure=b1nb0, rep=100, print.attr=TRUE)
+#' #Plot using all the information
+#' plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF)
+#' #Using the wrapper function
+#' npcrest(df=data, exit=exit, event=event, exposure=b1nb0,rep=100, maxtime=20, print.attr=TRUE)
 #'
 #' @docType package
 #' @name hrcomprisk

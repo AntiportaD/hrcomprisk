@@ -2,7 +2,7 @@
 % Please edit documentation in R/CRCumInc.R
 \name{CRCumInc}
 \alias{CRCumInc}
-\title{Estimation of Cumulative Incidence (CIF) of competing events}
+\title{Estimation of Cumulative Incidence of competing events}
 \usage{
 CRCumInc(df, time, event, exposed, entry = NULL, weights = NULL,
   ipwvars = NULL, print.attr = T)
@@ -25,11 +25,28 @@ CRCumInc(df, time, event, exposed, entry = NULL, weights = NULL,
 \item{print.attr}{A logical value `TRUE/FALSE` if results needed to be returned in console.}
 }
 \value{
-Estimating CIF per event and exposure level
+A data frame with the following columns:
+
+\code{event}    Type of event that occurs at the given time.
+
+\code{exposure}    Exposure group in which the event happens.
+
+\code{time}     Time of the event.
+
+\code{CIoinc_comp}    Value of the unexposed (denoted by “o”) composite cumulative incidence at the given time.
+
+\code{CIxinc_comp}    Value of the exposed (denoted by “x”) composite cumulative incidence at the given time.
+
+\code{CIoinc_1}      Value of the unexposed cumulative incidence of event 1 at the given time.
+
+\code{CIxinc_1}    Value of the exposed cumulative incidence of event 1 at the given time.
+
+\code{R_1}     Sub-hazard ratio/Cause-specific hazard ratio for event 1.
+
+\code{R_2}     Sub-hazard ratio/Cause-specific hazard ratio for event 2.
 }
 \description{
-This function is based on the CIF estimated by the survival package
-Returns an object type dataframe with the following variables and order:
-col1		col2		col3	col4		col5	...
-event	exposure	time	CI0inc_i	CI1inc_i ...
+Estimation of Cumulative Incidence Functions (CIF) of competing events.
+
+This function is based on the CIF estimated by the survival package.
 }

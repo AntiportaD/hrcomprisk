@@ -7,21 +7,21 @@
 plotCIF(cifobj, maxtime = Inf, ci = NULL, eoi = -1)
 }
 \arguments{
-\item{cifobj}{A number.}
+\item{cifobj}{A dataframe containing the Cumulative Incidence of each competing event by exposure group.}
 
-\item{maxtime}{A number.}
+\item{maxtime}{Largest time to display on the x-axis of all output plots.}
 
-\item{ci}{A number.}
+\item{ci}{A dataframe containing the 95\% CI for each ratio of csHR/sHR.}
 
-\item{eoi}{A number.}
+\item{eoi}{Event number for the event of interest, useful when more than two events exist.}
 }
 \value{
-Plot function
+A large list containing 2 figures:
+
+\code{$plot1}        Plot the cumulative incidence of the composite event and of each event by exposure group
+
+\code{$plot2}        Plot the ratio of Sub-hazard ratio and Cause-specific hazard ratio for each event i (Ri)
 }
 \description{
-Returns a figure
-Dataset needed for function to work: the result from the data_CIF function
-x is data, x default, and z is uppertime (optional) default set to 99999
-this needs event, exposure, time, CI0_comp, CI1_comp,CI0inc_1,CI1inc_1, CI0inc_!1,CI1inc_!1
-which is the result of CRCumInc(event)
+Plot Cumulative Incidence and Ratio of sHR/csHR.
 }

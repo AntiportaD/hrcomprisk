@@ -1,17 +1,15 @@
 #' Plot Incidence and Ratio of sHR/csHR
 #'
-#' Returns a figure
-#' Dataset needed for function to work: the result from the data_CIF function
-#' x is data, x default, and z is uppertime (optional) default set to 99999
-#' this needs event, exposure, time, CI0_comp, CI1_comp,CI0inc_1,CI1inc_1, CI0inc_!1,CI1inc_!1
-#' which is the result of CRCumInc(event)
-#' @param cifobj A number.
-#' @param maxtime A number.
-#' @param ci A number.
-#' @param eoi A number.
+#' @description Plot Cumulative Incidence and Ratio of sHR/csHR.
+#' @param cifobj A dataframe containing the Cumulative Incidence of each competing event by exposure group.
+#' @param maxtime Largest time to display on the x-axis of all output plots.
+#' @param ci A dataframe containing the 95\% CI for each ratio of csHR/sHR.
+#' @param eoi Event number for the event of interest, useful when more than two events exist.
+#' @return A large list containing 2 figures:
+#' @return \code{$plot1}        Plot the cumulative incidence of the composite event and of each event by exposure group
+#' @return \code{$plot2}        Plot the ratio of Sub-hazard ratio and Cause-specific hazard ratio for each event i (Ri)
 #' @importFrom "grDevices" "gray" "recordPlot"
 #' @importFrom "graphics" "abline" "axis" "box" "lines" "mtext" "par" "plot" "text"
-#' @return Plot function
 #' @export
 
 plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
@@ -44,6 +42,10 @@ plotCIF <- function (cifobj, maxtime = Inf, ci = NULL, eoi=-1)
   if(eoi==3) {J1o <- I3o; J1x <- I3x; J2o <- I2o+I1o+I4o; J2x <- I2x+I1x+I4x}
   if(eoi==4) {J1o <- I4o; J1x <- I4x; J2o <- I2o+I3o+I1o; J2x <- I2x+I3x+I1x}
   cifplots <- NULL
+
+  #exit call
+  opar <- par(no.readonly = TRUE)
+  on.exit(par(opar))
 
   par(mgp = c(2.25, 0.5, 0), las = 1, mfrow = c(1, 2), mar = c(5.1, 4.1, 2.1, 2.1), cex.lab = 1, cex.axis = 1)
   plot(0, 0, pch = 16, xlim = c(0, max(time)), ylim = c(0, 1), main = "", ylab = "", xlab = "Time", cex.lab = 1, font.main = 12, type = "n", yaxt = "n", xaxs = "i")
