@@ -3,7 +3,6 @@
 \docType{package}
 \name{hrcomprisk}
 \alias{hrcomprisk}
-\alias{hrcomprisk-package}
 \title{Nonparametric Assessment Between Competing Risks Hazards}
 \description{
 Estimate nonparametric cumulative-incidence based estimation

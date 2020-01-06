@@ -4,8 +4,16 @@
 \alias{CRCumInc}
 \title{Estimation of Cumulative Incidence of competing events}
 \usage{
-CRCumInc(df, time, event, exposed, entry = NULL, weights = NULL,
-  ipwvars = NULL, print.attr = T)
+CRCumInc(
+  df,
+  time,
+  event,
+  exposed,
+  entry = NULL,
+  weights = NULL,
+  ipwvars = NULL,
+  print.attr = T
+)
 }
 \arguments{
 \item{df}{A data frame containing, at a minimum, exit, event, and exposure.}

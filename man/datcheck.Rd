@@ -4,8 +4,7 @@
 \alias{datcheck}
 \title{Data Check for Wrapper Function}
 \usage{
-datcheck(df, qexit, qevent, qexposure, qentry, qweights, qipwvars,
-  eoi = -1)
+datcheck(df, qexit, qevent, qexposure, qentry, qweights, qipwvars, eoi = -1)
 }
 \arguments{
 \item{df}{A data frame containing, at a minimum, exit, event, and exposure.}

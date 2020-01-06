@@ -4,9 +4,19 @@
 \alias{npcrest}
 \title{Nonparametric Estimation of the Ratios of Hazard Ratios}
 \usage{
-npcrest(df, exit, event, exposure, entry = NULL, weights = NULL,
-  ipwvars = NULL, maxtime = Inf, rep = NULL, eoi = -1,
-  print.attr = T)
+npcrest(
+  df,
+  exit,
+  event,
+  exposure,
+  entry = NULL,
+  weights = NULL,
+  ipwvars = NULL,
+  maxtime = Inf,
+  rep = NULL,
+  eoi = -1,
+  print.attr = T
+)
 }
 \arguments{
 \item{df}{A data frame containing, at a minimum, exit, event, and exposure.}

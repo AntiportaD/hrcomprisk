@@ -4,8 +4,18 @@
 \alias{bootCRCumInc}
 \title{Bootstrap for Ratios of Hazard Ratios}
 \usage{
-bootCRCumInc(df, exit, event, exposure, entry = NULL, weights = NULL,
-  ipwvars = NULL, rep = 0, print.attr = T, seed = 54321)
+bootCRCumInc(
+  df,
+  exit,
+  event,
+  exposure,
+  entry = NULL,
+  weights = NULL,
+  ipwvars = NULL,
+  rep = 0,
+  print.attr = T,
+  seed = 54321
+)
 }
 \arguments{
 \item{df}{A data frame containing, at a minimum, exit, event, and exposure.}
