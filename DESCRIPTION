@@ -1,7 +1,7 @@
 Package: hrcomprisk
 Type: Package
 Title: Nonparametric Assessment Between Competing Risks Hazard Ratios
-Version: 0.1.0
+Version: 0.1.1
 Author: Daniel Antiporta <dantiporta@jhu.edu>; 
         Matthew Matheson <mmathes4@jhu.edu>;
         Derek Ng <dng@jhu.edu>;

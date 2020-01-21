@@ -68,21 +68,9 @@
 #'
 #' \url{https://github.com/AntiportaD/hrcomprisk}
 #'
-#'@examples
-#'
-#' #data from the package
+#' @examples
+#' #data from the package - See fuctions for specific examples
 #' data <- hrcomprisk::dat_ckid
-#' #Estimate the Cumulative Incidence Functions and Ratios of sHR and csHR
-#' mydat.CIF<-CRCumInc(df=data, time=exit, event=event, exposed=b1nb0, print.attr=TRUE)
-#' #Plot the CIs and Ratios estimated
-#' plots<-plotCIF(cifobj=mydat.CIF, maxtime = 20, eoi = 1)
-#' #Obtain the 95%CI by bootstraping
-#' ciCIF<-bootCRCumInc(df=data, exit=exit, event=event, exposure=b1nb0, rep=100, print.attr=TRUE)
-#' #Plot using all the information
-#' plotCIF(cifobj=mydat.CIF, maxtime= 20, ci=ciCIF)
-#' #Using the wrapper function
-#' npcrest(df=data, exit=exit, event=event, exposure=b1nb0,rep=100, maxtime=20, print.attr=TRUE)
-#'
 #' @docType package
 #' @name hrcomprisk
 NULL
