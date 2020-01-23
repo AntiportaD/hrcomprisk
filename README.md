@@ -14,7 +14,8 @@ Ratios.
 ## Installation
 
 You can install the latest version of `hrcomprisk` in CRAN or the
-development version from [Github](https://github.com):
+development version from
+[Github](https://github.com/AntiportaD/hrcomprisk):
 
 ``` r
 # Install hrcomprisk from CRAN

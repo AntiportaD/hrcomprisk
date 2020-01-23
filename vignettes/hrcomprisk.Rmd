@@ -3,7 +3,7 @@ title: "Introduction to hrcomprisk"
 author: "Ng D, Antiporta DA, Matheson M, Munoz A"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette_1}
+  %\VignetteIndexEntry{Introduction to hrcomprisk}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,9 +19,6 @@ knitr::opts_chunk$set(
   fig.height = 8
 )
 ```
-
-# hrcomprisk: Nonparametric Assessment of Differences Between Competing Risks Hazards
-
 <!-- badges: start -->
 <!-- badges: end -->
 
@@ -29,11 +26,14 @@ This package aims to estimate Nonparametric Cumulative-Incidence Based Estimatio
 
 ## Installation
 
-You can install the version 0.1.0 of `hrcomprisk` from [Github](https://github.com) with:
+You can install the latest version of `hrcomprisk` in CRAN or the development version from [Github](https://github.com/AntiportaD/hrcomprisk):
 
 ``` r
-library(devtools)
-install_github("AntiportaD/hrcomprisk")
+# Install hrcomprisk from CRAN
+install.packages("hrcomprisk")
+# Or the development version from GitHub:
+# install.packages("devtools")
+devtools::install_github("AntiportaD/hrcomprisk")
 ```
 
 ## Using a formatted data set to apply the `hrcomprsk` package
